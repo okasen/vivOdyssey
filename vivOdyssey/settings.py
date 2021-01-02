@@ -146,8 +146,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/' # new
 
 #email backend
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = str(BASE_DIR.joinpath('send_emails'))
+#EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+#EMAIL_FILE_PATH = str(BASE_DIR.joinpath('send_emails'))
 
 #dates
 DATE_INPUT_FORMATS = ['%m/%d/%Y']
