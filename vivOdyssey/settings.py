@@ -163,7 +163,7 @@ DATABASES = {
 }
 
 #
-SECRET_KEY = os.environ.get('HB2_SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', 'Optional default value')
 CURRENT_ENV = os.environ.get('HB2_ENV')
 B2_BUCKET_NAME = os.environ.get('HB2_B2_BUCKET_NAME')
 B2_BUCKET_ID = os.environ.get('HB2_B2_BUCKET_ID')
