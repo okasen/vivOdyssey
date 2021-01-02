@@ -15,15 +15,9 @@ import os
 import psycopg2
 
 
-#DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(
-    host="localhost",
-    port="5432",
-    database="viv-odyssey",
-    user="postgres",
-    password="BlackC@")
+DATABASE_URL = os.environ['DATABASE_URL']
 
-#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'q78xgbo&@^pheqa5-%ao#pp*$88oba(5_3#7142@(nmmj_&g8d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
 
@@ -134,8 +128,8 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    'D:\VivO\vivOdyssey\static',
+    BASE_DIR / 'static',
+    'D:\\VivO\\vivOdyssey\\assets',
     ]
 #add login redirect
 LOGIN_REDIRECT_URL = '/'
@@ -152,6 +146,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'viv-odyssey',
+        'USER': 'postgres',
+        'PASSWORD': 'BlackC@',
         'OPTIONS': {
             'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
         },

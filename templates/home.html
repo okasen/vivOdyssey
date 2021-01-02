@@ -2,10 +2,16 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
+<html>
+<head>
 {% block title %}Home{% endblock %}
 
+</style>
+</head>
+<body>
+
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% if user.is_authenticated %}
 <div align=center>
   Hi {{ user.username }}!
@@ -13,12 +19,21 @@
   <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
  </div>
 {% else %}
-<div align=center>
-  <p>You are not logged in</p>
-  <p>
-  <a href="{% url 'login' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="log in" width="15%"></a>
-  <a href="{% url 'signup' %}"><img src="{% static 'images/eggs/canyon.png' %}" alt="log in" width="15%"></a>
-  </p>
+<div class="options" align="center">
+	<div class="row1" align="center">
+	  <p><a href="{% url 'about' %}"><img src="{% static 'images/eggs/plain.png' %}" alt="About Viv Odyssey" width="50%"><br>About Viv Odyssey</a></p>
+	</div>
+	<div class="row2" align="center">	
+		<div class="column" align="center">
+		  <a href="{% url 'login' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="Log in" width="100%"><br>Log in</a>
+		</div>
+		<div class="column"align="center">
+		  <a href="{% url 'signup' %}"><img src="{% static 'images/eggs/canyon.png' %}" alt="Create Account" width="100%"><br>Create an Account</a>
+		</div> 
+	  </p>
+	</div>
 </div>
 {% endif %}
 {% endblock %}
+</body>
+</html?

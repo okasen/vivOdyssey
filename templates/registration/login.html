@@ -7,11 +7,13 @@
 
 {% block content %}
 <h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
+<div class="rect">
+	<form method="post">
+	  {% csrf_token %}
+	  {{ form.as_p }}
+	  <button type="submit">Log In</button>
+	</form>
+</div>
 <p>
 <a href="{% url 'password_reset' %}">Forgot your password?</a>
 </p>
