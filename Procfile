@@ -1,1 +1,1 @@
-web: gunicorn viv-odyssey.wsgi 
+web: gunicorn vivOdyssey.wsgi 
