@@ -159,7 +159,7 @@ B2_BUCKET_NAME = os.environ.get('HB2_B2_BUCKET_NAME')
 B2_BUCKET_ID = os.environ.get('HB2_B2_BUCKET_ID')
 B2_ACCOUNT_ID = os.environ.get('HB2_B2_ACCOUNT_ID')
 B2_APPLICATION_KEY = os.environ.get('HB2_B2_APP_KEY')
-DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage
+DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage'
 
 import dj_database_url
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
