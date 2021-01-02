@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import psycopg2
+import django_heroku
 
 
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -152,14 +153,29 @@ LOGOUT_REDIRECT_URL = '/' # new
 #dates
 DATE_INPUT_FORMATS = ['%m/%d/%Y']
 
-#for BackBlaze
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'viv-odyssey',
+        'USER': 'postgres',
+        'PASSWORD': 'BlackC@',
+        'OPTIONS': {
+            'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
+        },
+    },
+}
+
+#
 SECRET_KEY = os.environ.get('HB2_SECRET_KEY')
 CURRENT_ENV = os.environ.get('HB2_ENV')
 B2_BUCKET_NAME = os.environ.get('HB2_B2_BUCKET_NAME')
 B2_BUCKET_ID = os.environ.get('HB2_B2_BUCKET_ID')
 B2_ACCOUNT_ID = os.environ.get('HB2_B2_ACCOUNT_ID')
 B2_APPLICATION_KEY = os.environ.get('HB2_B2_APP_KEY')
-DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage'
+DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage
+
+django_heroku.settings(locals())
+
 
 import dj_database_url
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
