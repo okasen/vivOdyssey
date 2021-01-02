@@ -153,6 +153,7 @@ LOGOUT_REDIRECT_URL = '/' # new
 #dates
 DATE_INPUT_FORMATS = ['%m/%d/%Y']
 
+<<<<<<< HEAD
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -166,13 +167,16 @@ DATABASES = {
 }
 
 #
+=======
+#for BackBlaze
+>>>>>>> 6e65f6f3802d0f7ad49794afe1e487266f03ae7c
 SECRET_KEY = os.environ.get('HB2_SECRET_KEY')
 CURRENT_ENV = os.environ.get('HB2_ENV')
 B2_BUCKET_NAME = os.environ.get('HB2_B2_BUCKET_NAME')
 B2_BUCKET_ID = os.environ.get('HB2_B2_BUCKET_ID')
 B2_ACCOUNT_ID = os.environ.get('HB2_B2_ACCOUNT_ID')
 B2_APPLICATION_KEY = os.environ.get('HB2_B2_APP_KEY')
-DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage
+DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage'
 
 django_heroku.settings(locals())
 
