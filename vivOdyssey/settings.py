@@ -152,18 +152,6 @@ LOGOUT_REDIRECT_URL = '/' # new
 #dates
 DATE_INPUT_FORMATS = ['%m/%d/%Y']
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'viv-odyssey',
-        'USER': 'postgres',
-        'PASSWORD': 'BlackC@',
-        'OPTIONS': {
-            'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
-        },
-    },
-}
-
 #for BackBlaze
 SECRET_KEY = os.environ.get('HB2_SECRET_KEY')
 CURRENT_ENV = os.environ.get('HB2_ENV')
