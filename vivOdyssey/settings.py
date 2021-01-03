@@ -15,6 +15,7 @@ from pathlib import Path
 import os
 import psycopg2
 
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
