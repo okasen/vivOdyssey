@@ -17,4 +17,4 @@ class LoreView(TemplateView):
             context = {'loreContents' : loreText }
         except:
             context = {'loreContnets' : "stuff" }
-        return render(request, 'lore/about.html', context, content_type="text/plain")
+        return render(request, 'lore/about.html', context, content_type="text/html")
