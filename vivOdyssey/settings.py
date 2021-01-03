@@ -15,6 +15,7 @@ from pathlib import Path
 import os
 import psycopg2
 import boto3
+import django-storages
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
