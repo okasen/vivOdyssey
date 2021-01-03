@@ -126,7 +126,7 @@ USE_TZ = True
 BACKBLAZE_CONFIG = {
     "application_key_id": os.getenv("BACKBLAZE_KEY_ID"), # however you want to securely retrieve these values
     "application_key": os.getenv("BACKBLAZE_KEY"),
-    "bucket": vivAssets,
+    "bucket": "vivAssets",
 }
 
 
