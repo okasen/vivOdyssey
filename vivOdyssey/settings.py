@@ -129,7 +129,6 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
     'D:\\VivO\\vivOdyssey\\assets',
     ]
-add login redirect
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/' # new
 
