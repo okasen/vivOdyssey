@@ -127,7 +127,7 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    'D:\\VivO\\vivOdyssey\\assets',
+    'vivOdyssey\\assets',
     ]
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/' # new

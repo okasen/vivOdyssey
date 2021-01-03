@@ -4,19 +4,13 @@
 }
 
 @font-face {
-  font-family: garamond;
-  src: url("../css/fonts/garamond-reg.woff");
-}
-
-@font-face {
-  font-family: garamond;
-  src: url("../css/fonts/garamond-ita.woff");
-  font-style: italic;
+  font-family: calluna;
+  src: url("../css/fonts/callunasansregular.woff");
 }
 
 body {
 	background-color: #deF;
-	font-family: garamond;
+	font-family: calluna;
 }
 
 h1 {
