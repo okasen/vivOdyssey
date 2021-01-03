@@ -9,7 +9,7 @@ import os
 class LoreView(TemplateView):
 
     def readLore(request):
-        textFile = "text/BackStory.html"
+        textFile = "text/BackStory.txt"
         textFilePath = os.path.join(settings.STATIC_URL, textFile)
         with open(textFilePath, 'r') as f:
             loreText = f.read()
