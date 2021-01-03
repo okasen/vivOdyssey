@@ -14,7 +14,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import psycopg2
-import boto3
+import django.core.files.storage.Storage
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
@@ -23,7 +23,7 @@ DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "jquery",
     'accounts',
     'storages',
+    'django_backblaze_b2',
 ]
 
 MIDDLEWARE = [
@@ -123,12 +124,17 @@ USE_L10N = False
 USE_TZ = True
 
 
+BACKBLAZE_CONFIG = {
+    "application_key_id": os.getenv("BACKBLAZE_KEY_ID"), # however you want to securely retrieve these values
+    "application_key": os.getenv("BACKBLAZE_KEY"),
+    "bucket": vivAssets,
+}
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-STATIC_URL = 'https://vivassets.s3.us-west-000.backblazeb2.com/'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = os.path.join(BASE_DIR, '/b2/')
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
