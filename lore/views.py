@@ -11,7 +11,10 @@ class LoreView(TemplateView):
     def readLore(request):
         textFile = "text/BackStory.txt"
         textFilePath = os.path.join(settings.STATIC_URL, textFile)
-        with open(textFilePath, 'r') as f:
-            loreText = f.read()
-        context = {'loreContents' : loreText }
+        try:
+            with open(textFilePath, 'r') as f:
+                loreText = f.read()
+            context = {'loreContents' : loreText }
+        except:
+            context = {'loreContnets' : "stuff" }
         return render(request, 'lore/about.html', context, content_type="text/plain")
