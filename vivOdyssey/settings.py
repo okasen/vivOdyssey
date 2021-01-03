@@ -31,9 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = False
 
 ALLOWED_HOSTS = [
-
-     'viv-odyssey.herokuapp.com',
-     '127.0.0.1',
+     os.environ['WEBSITE_HOSTNAME'],
     ]
 
 
