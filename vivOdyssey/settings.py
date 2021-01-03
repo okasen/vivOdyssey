@@ -14,7 +14,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import psycopg2
-import django.core.files.storage.Storage
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
