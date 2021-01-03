@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import psycopg2
-import django_heroku
 
 
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -22,6 +21,21 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -37,11 +51,8 @@ STATICFILES_DIRS = (
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q78xgbo&@^pheqa5-%ao#pp*$88oba(5_3#7142@(nmmj_&g8d'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
 
@@ -71,6 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'vivOdyssey.urls'
@@ -166,16 +178,13 @@ DATABASES = {
 }
 
 #
-SECRET_KEY = os.environ.get('HB2_SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', 'Optional default value')
 CURRENT_ENV = os.environ.get('HB2_ENV')
 B2_BUCKET_NAME = os.environ.get('HB2_B2_BUCKET_NAME')
 B2_BUCKET_ID = os.environ.get('HB2_B2_BUCKET_ID')
 B2_ACCOUNT_ID = os.environ.get('HB2_B2_ACCOUNT_ID')
 B2_APPLICATION_KEY = os.environ.get('HB2_B2_APP_KEY')
 DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage'
-
-django_heroku.settings(locals())
-
 
 import dj_database_url
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
