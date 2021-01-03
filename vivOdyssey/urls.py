@@ -28,5 +28,3 @@ urlpatterns = [
     path('lore/', include('lore.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'), 
 ]
-
-urlpatterns += staticfiles_urlpatterns()
