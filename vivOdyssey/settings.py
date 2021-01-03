@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 """
 Django settings for mysite project.
 
@@ -380,4 +380,3 @@ DEFAULT_FILE_STORAGE = 'django_b2storage.backblaze_b2.B2Storage'
 
 import dj_database_url
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
->>>>>>> cef26f2b2d85d131658f0b65e6aa24664b13869a
