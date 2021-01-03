@@ -14,4 +14,4 @@ class LoreView(TemplateView):
         with open(textFilePath, 'r') as f:
             loreText = f.read()
         context = {'loreContents' : loreText }
-        return render(request, 'lore/about.html', context, content_type="text/html")
+        return render(request, 'lore/about.html', context, content_type="text/plain")
