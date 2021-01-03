@@ -1,1 +1,1 @@
-web: gunicorn vivOdyssey.wsgi 
+web: gunicorn vivOdyssey.wsgi --log-level info
