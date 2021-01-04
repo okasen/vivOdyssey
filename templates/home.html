@@ -11,18 +11,18 @@
 <body>
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="https://f000.backblazeb2.com/b2api/v1/b2_download_file_by_id?fileId=4_ze8a99d2b1cbcc558746e0011_f107c04827cf29d1f_d20210102_m220442_c000_v0001064_t0051}">
-{% if user.is_authenticated %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 <div align=center>
+<div class="options" align="center">
+	<div class="row1" align="center">
+	  <p><a href="{% url 'about' %}"><img src="{% static 'images/eggs/plain.png' %}" alt="About Viv Odyssey" width="50%"><br>About Viv Odyssey</a></p>
+	</div>
+{% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>
   <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
  </div>
 {% else %}
-<div class="options" align="center">
-	<div class="row1" align="center">
-	  <p><a href="{% url 'about' %}"><img src="{% static 'images/eggs/plain.png' %}" alt="About Viv Odyssey" width="50%"><br>About Viv Odyssey</a></p>
-	</div>
 	<div class="row2" align="center">	
 		<div class="column" align="center">
 		  <a href="{% url 'login' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="Log in" width="100%"><br>Log in</a>
