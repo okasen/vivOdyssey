@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 
-     'http://46.101.45.185/',
+     '46.101.45.185',
     ]
 
 
