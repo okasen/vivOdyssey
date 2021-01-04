@@ -17,10 +17,6 @@ import psycopg2
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DATABASE_URL = os.environ['DATABASE_URL']
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,9 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-     os.environ['WEBSITE_HOSTNAME'],
-    ]
+ALLOWED_HOSTS = ['46.101.45.185']
 
 
 # Application definition
@@ -46,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "jquery",
     'accounts',
-    'storages',
     'django_backblaze_b2',
 ]
 
@@ -58,7 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'vivOdyssey.urls'
@@ -135,7 +127,7 @@ STATIC_URL = os.path.join(BASE_DIR, '/b2/')
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-##STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'assets'),
@@ -153,14 +145,11 @@ DATE_INPUT_FORMATS = ['%m/%d/%Y']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'viv-odyssey',
-        'USER': 'postgres',
-        'PASSWORD': 'BlackC@',
+        'NAME': 'vivo',
+        'USER': 'okasen',
+        'PASSWORD': 'sp33dyC@',
         'OPTIONS': {
             'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
         },
     },
 }
-
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
