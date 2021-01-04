@@ -119,9 +119,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'staticfiles')
-STATIC_URL = os.path.join(PROJECT_DIR, 'staticfiles')
+STATIC_URL = '/staticfiles/'
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'assets'),
+    '/assets/',
     ]
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/' # new
