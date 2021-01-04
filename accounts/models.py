@@ -31,7 +31,7 @@ class MyUserManager(BaseUserManager):
         return user
     
 class Player(AbstractUser):
-    EMAIL_FIELD = models.EmailField(_('email address'), unique=True)
+    EMAIL_FIELD = models.EmailField(('email address'), unique=True)
 ##    Username = models.CharField(max_length=40, unique=True)
 ##    USERNAME_FIELD = 'Username'
     Display_Name = models.CharField(max_length=40, unique=False)
@@ -40,5 +40,5 @@ class Player(AbstractUser):
     about_user = models.TextField(max_length=200, blank=True) #user bio section
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    REQUIRED_FIELDS = ['date_of_birth', 'EMAIL_FEILD']
+    REQUIRED_FIELDS = ['date_of_birth', 'EMAIL_FIELD']
 
