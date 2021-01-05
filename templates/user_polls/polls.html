@@ -98,8 +98,9 @@ $(document).ready(function (){
 					</tr>`
 				)
 			},
-			error: function (response) {
-				console.log(response);
+                error: function (response) {
+                    // alert the error if any error occured
+                    alert(response["responseJSON"]["error"]);
 			}
 		})
 	})
