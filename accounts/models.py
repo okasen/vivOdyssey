@@ -31,7 +31,7 @@ class MyUserManager(BaseUserManager):
         return user
     
 class Player(AbstractUser):
-    EMAIL_FIELD = models.EmailField(('email address'), unique=True)
+    EMAIL_FIELD = models.EmailField(('email address'), unique=True, default="noemail@void.com")
 ##    Username = models.CharField(max_length=40, unique=True)
 ##    USERNAME_FIELD = 'Username'
     Display_Name = models.CharField(max_length=40, unique=False)
