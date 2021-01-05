@@ -16,5 +16,5 @@ class LoreView(TemplateView):
                 loreText = f.read()
             context = {'loreContents' : loreText }
         except:
-            context = {'loreContnets' : "stuff" }
+            context = {'loreContents' : "stuff" }
         return render(request, 'lore/about.html', context, content_type="text/html")
