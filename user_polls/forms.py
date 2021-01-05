@@ -11,9 +11,9 @@ class QuestionCreate(forms.ModelForm): #should only be accessible by admin
                 'class': 'form-control',
             })
 
-        class Meta:
-            model = Question
-            fields = "__all__"
+    class Meta:
+        model = Question
+        fields = ("__all__")
             
 class AnswerForm(forms.ModelForm): #accessible by anyone logged in
     def __init__(self, *args, **kwargs):
@@ -24,6 +24,6 @@ class AnswerForm(forms.ModelForm): #accessible by anyone logged in
                 'class': 'form-control',
             })
 
-        class Meta:
-            model = Answer
-            fields = "__all__"
+    class Meta:
+        model = Answer
+        fields = ("__all__")
