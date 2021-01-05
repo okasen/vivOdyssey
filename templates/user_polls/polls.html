@@ -53,7 +53,7 @@ $(document).ready(function (){
 			type: "POST",
 			url: "{% url "polls" %}",
 			dataType: "json",
-			contentType: "application/json"
+			contentType: "application/json",
 			data: serializedData,
 			success: function (response){
 				console.log("success");
