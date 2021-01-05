@@ -28,7 +28,7 @@ class QAView(View):
         return render(self.request, self.template_name, {"form": form, "questions": questions})
 
     def post(self, *args, **kwargs):
-        form_class = QuestionCreate
+        form = self.form_class()
         if self.request.is_ajax and self.request.method == "POST":
             question = QuestionCreate(self.request.POST)
             if form.is_valid():
