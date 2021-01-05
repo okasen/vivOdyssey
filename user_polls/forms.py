@@ -2,7 +2,7 @@ from .models import Question, Answer
 from django import forms
 import datetime
 
-class QuestionCreate(forms.ModelForm): #should only be accessible by admin
+class QuestionCreate(forms.modelForm): #should only be accessible by admin
     def __init__(self, *args, **kwargs):
         super(QuestionCreate, self).__init__(*args, **kwargs)
 
@@ -15,7 +15,7 @@ class QuestionCreate(forms.ModelForm): #should only be accessible by admin
             model = Question
             fields = ("__all__")
             
-class AnswerForm(forms.ModelForm): #accessible by anyone logged in
+class AnswerForm(forms.modelForm): #accessible by anyone logged in
     def __init__(self, *args, **kwargs):
         super(AnswerForm, self).__init__(*args, **kwargs)
 
