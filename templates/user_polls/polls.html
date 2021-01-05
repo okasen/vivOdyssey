@@ -46,7 +46,7 @@
 		var serializedData = $(this).serialize();
 		$.ajax({
 			type: 'POST',
-			url: "{% url 'post_question' %}",
+			url: "{% url 'polls:post_question' %}",
 			data: serializedData,
 			success: function (response){
 				$("#question-form").trigger('reset');
@@ -72,7 +72,7 @@
 		var question_title = $(this).val();
 		$.ajax({
 			type: 'GET',
-			url: "{% url 'validate_question' %}
+			url: "{% url 'polls:validate_question' %}
 			data: {"question_title": title},
 			success: function (response) {
 				if(!response["valid"]){
