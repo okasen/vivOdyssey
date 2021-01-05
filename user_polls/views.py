@@ -28,14 +28,20 @@ class QAView(View):
         return render(self.request, self.template_name, {"form": form, "questions": questions})
 
     def post(self, *args, **kwargs):
+        # request should be ajax and method should be POST.
         if self.request.is_ajax and self.request.method == "POST":
-            question = self.form_class(self.request.POST)
-            if question.is_valid():
-                instance =  question.save()
+            # get the form data
+            form = self.form_class(self.request.POST)
+            # save the data and after fetch the object in instance
+            if form.is_valid():
+                instance = form.save()
+                # serialize in new friend object in json
                 ser_instance = serializers.serialize('json', [ instance, ])
+                # send to client side.
                 return JsonResponse({"instance": ser_instance}, status=200)
             else:
-                return JsonResponse({"error message": question.errors}, status=400)
+                # some form errors occured.
+                return JsonResponse({"error": form.errors}, status=400)
 
         return JsonResponse({"error": ""}, status=400)
 
