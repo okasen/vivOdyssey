@@ -51,7 +51,7 @@ $(document).ready(function (){
 		var serializedData = $(this).serialize();
 		$.ajax({
 			type: 'POST',
-			url: "http://46.101.45.185/polls/polls/posting",
+			url: "{% url 'polls' %}",
 			data: serializedData,
 			success: function (response){
 				$("#question-form").trigger('reset');
