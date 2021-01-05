@@ -45,14 +45,13 @@
 <script>
 
 $(document).ready(function (){
-var self = $(this);
 
 	$("#question-form").submit(function (e) {
 		e.preventDefault();
 		var serializedData = $(this).serialize();
 		$.ajax({
 			type: 'POST',
-			url: "{% url 'polls' %}",
+			url: "{% url "polls" %}",
 			data: serializedData,
 			success: function (response){
 				$("#question-form").trigger('reset');
