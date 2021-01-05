@@ -72,7 +72,7 @@
 		var question_title = $(this).val();
 		$.ajax({
 			type: 'GET',
-			url: "{% url 'receive_Question' %}"
+			url: "{% url 'receive_Question' %}",
 			data: {"question_title": question_title},
 			success: function (response) {
 				if(!response["valid"]){
