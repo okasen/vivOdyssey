@@ -89,12 +89,7 @@ $(document).ready(function (){
 				
 				var instance = JSON.parse(response["instance"]);
 				var field = instance[0]["fields"];
-				$("#all_questions tbody").prepend(
-					`<tr>
-					<td>${fields["title"]||""}</td>
-					<td>${fields["text"]||""}</td>
-					</tr>`
-				)
+
 			},
 			error: function (response) {
 				console.log(response);
