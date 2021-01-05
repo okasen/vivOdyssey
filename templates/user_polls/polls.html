@@ -61,10 +61,9 @@
 					</tr>`
 				)
 			},
-                error: function (response) {
-                    // alert the error if any error occured
-                    alert(response["responseJSON"]["error"]);
-                }
+			error: function (response) {
+				console.log(response)
+			}
 		})
 	})
 	
