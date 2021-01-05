@@ -52,7 +52,8 @@ $(document).ready(function (){
 		$.ajax({
 			type: "POST",
 			url: "{% url "polls" %}",
-			headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+			dataType: "json",
+			contentType: "application/json"
 			data: serializedData,
 			success: function (response){
 				console.log("success");
