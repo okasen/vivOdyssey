@@ -3,10 +3,12 @@ from django.http import JsonResponse
 from django.core import serializers
 from .forms import QuestionCreate
 from .models import Question
-from django.views.generic.base import TemplateView
+from django.urls import reverse_lazy
+from django.views import generic
+
 # Create your views here.
 
-class QAView(TemplateView):
+class QAView(generic.CreateView):
     def questionView(request):
         form = QuestionCreate()
         questions = Question.objects.all()
