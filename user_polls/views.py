@@ -22,12 +22,12 @@ def receiveQuestion(request):
 class QAView(View):
     form_class = QuestionCreate
     template_name = 'user_polls/polls.html'
-    def questionView(self, *args, **kwargs):
+    def get(self, *args, **kwargs):
         form = self.form_class()
         questions = Question.objects.all()
         return render(request, template_name, {"form": form, "questions": questions})
 
-    def postQuestion(self, *args, **kwargs):
+    def post(self, *args, **kwargs):
         if request.is_ajax and request.method == "POST":
             question = QuestionCreate(self.request.POST)
             if form.is_valid():
