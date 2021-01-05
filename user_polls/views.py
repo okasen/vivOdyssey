@@ -11,7 +11,7 @@ from django.views import View
 def receiveQuestion(request):
     if request.is_ajax and request.method == "GET":
         question_title = request.GET.get("title", None)
-        if Question.objects.filter(question_title = title).exists(): #if the question with this title exists, invalid
+        if Question.objects.filter(title = question_title).exists(): #if the question with this title exists, invalid
             return JsonResponse({"valid":False}, status = 200)
         else:
             return JsonResponse({"valid":True}, status = 200)
