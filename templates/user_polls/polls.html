@@ -41,6 +41,9 @@
 
 {% block javascript %}
 <script>
+
+$(document).ready(function (){
+
 	$("#question-form").submit(function (e) {
 		e.preventDefault();
 		var serializedData = $(this).serialize();
@@ -87,6 +90,7 @@
 			}
 		})
 	})
+})
 </script>
 {% endblock javascript %}
 	
