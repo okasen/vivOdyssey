@@ -1,9 +1,7 @@
 from django.urls import path
-
-from .views import QAView
+from .views import QAView, receiveQuestion
 
 urlpatterns = [
-    path('polls/', QAView.as_view(), name="polls"),]
-    path('get/ajax/validate/question', QAView.receiveQuestion, name = "receive_Question")
-
+    path('polls/', QAView.as_view(), name="polls"),
+    path('get/ajax/validate/question/', receiveQuestion, name = "receive_Question")
 ]
