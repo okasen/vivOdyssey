@@ -45,14 +45,23 @@
 <script>
 
 $(document).ready(function (){
+	function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	}
+	$.ajaxSetup({
+		beforeSend: function(xhr, settings) {
+			if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+				xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			}
+		}
+	});
 
 	$("#question-form").submit(function (e) {
 		e.preventDefault();
 		var serializedData = $(this).serialize();
+		
 		$.ajax({
-		    beforeSend: function(xhr) {
-			xhr.setRequestHeader('X-CSRF-TOKEN', token);
-			}
 			type: "POST",
 			url: "{% url "polls" %}",
 			dataType: "json",
