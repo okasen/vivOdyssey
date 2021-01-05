@@ -7,7 +7,7 @@ class QuestionCreate(forms.ModelForm): #should only be accessible by admin
         super(QuestionCreate, self).__init__(*args, **kwargs)
 
         for name in self.field.keys():
-            self.field[name].widget.attrs.update({
+            self.fields[name].widget.attrs.update({
                 'class': 'form-control',
             })
 
@@ -20,7 +20,7 @@ class AnswerForm(forms.ModelForm): #accessible by anyone logged in
         super(AnswerForm, self).__init__(*args, **kwargs)
 
         for name in self.field.keys():
-            self.field[name].widget.attrs.update({
+            self.fields[name].widget.attrs.update({
                 'class': 'form-control',
             })
 
