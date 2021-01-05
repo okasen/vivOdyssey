@@ -12,6 +12,8 @@
 				{{ field }}
 			</div>
 			{% endfor %}
+			
+			<div class = "col text-center">
 			<input type="submit" class="btn btn-primary" value="Create Question" />
 		</div>
 	</form>
@@ -49,7 +51,7 @@ $(document).ready(function (){
 		var serializedData = $(this).serialize();
 		$.ajax({
 			type: 'POST',
-			url: "{% url 'polls' %}",
+			url: "http://46.101.45.185/polls/polls/posting",
 			data: serializedData,
 			success: function (response){
 				$("#question-form").trigger('reset');
@@ -65,7 +67,7 @@ $(document).ready(function (){
 				)
 			},
 			error: function (response) {
-				console.log("error");
+				console.log(response);
 			}
 		})
 	})
@@ -86,7 +88,7 @@ $(document).ready(function (){
 				}
 			},
 			error: function (response) {
-				console.log("error");
+				console.log(response);
 			}
 		})
 	})
