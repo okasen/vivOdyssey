@@ -50,6 +50,9 @@ $(document).ready(function (){
 		e.preventDefault();
 		var serializedData = $(this).serialize();
 		$.ajax({
+		    beforeSend: function(xhr) {
+			xhr.setRequestHeader('X-CSRF-TOKEN', token);
+			}
 			type: "POST",
 			url: "{% url "polls" %}",
 			dataType: "json",
