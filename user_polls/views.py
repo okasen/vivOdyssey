@@ -36,7 +36,7 @@ class QAView(View):
                 ser_instance = serializers.serialize('json', [ instance, ])
                 return JsonResponse({"instance": ser_instance}, status=200)
             else:
-                return JsonResponse({"error message": form.errors}, status=400)
+                return JsonResponse({"error message": form.errors}, status=600)
 
         return JsonResponse({"error": ""}, status=400)
 
