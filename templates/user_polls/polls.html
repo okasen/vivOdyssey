@@ -34,7 +34,7 @@ function createDeleteButton() {
 	deleteButton.className = 'deleteClass';
 	return deleteButton;
 }
-var pollsRows = document.querySelector(".questionTable")
+var pollsRows = document.querySelector(".questionTable");
 pollsRows.addEventListener('click', function(event) {
 
 var elementClicked = event.target;
@@ -132,8 +132,8 @@ $(document).ready(function (){
 				if(!response["valid"]){
 					alert("Question with this title already exists");
 					var questionTitle = $("#id_question");
-					questionTitle.val("")
-					questionTitle.focus()
+					questionTitle.val("");
+					questionTitle.focus();
 				}
 			},
 			error: function (response) {
