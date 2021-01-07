@@ -28,6 +28,10 @@
 
 {% block javascript %}
 <script>
+$(document).ready(function (){
+
+
+
 function createDeleteButton() {
 	var deleteButton = document.createElement('button');
 	deleteButton.textContent = 'delete';
@@ -82,10 +86,6 @@ function getCookie(name) {
     return cookieValue;
 }
 var csrftoken = getCookie('csrftoken');
-
-
-
-$(document).ready(function (){
 
 
 	$("#question-form").submit(function (e) {
