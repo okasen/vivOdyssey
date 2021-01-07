@@ -47,8 +47,8 @@ class QAView(View):
 
     def delete(self, *args, **kwargs):
         if self.request.is_ajax and self.request.method == "DELETE":
-            form = self.form_class(self.request.DELETE)
-            id = request.DELETE['id']
+            form = self.form_class(self.request.POST)
+            id = request.POST['id']
             getId = get_object_or_404(Question, title = id)
             form.objects.filter(title=getId).delete()            
             
