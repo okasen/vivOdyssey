@@ -51,7 +51,7 @@ class QAView(View):
                 getId = get_object_or_404(Question, title = qid)
                 Question.objects.filter(title=getId).delete()
                 qClass.save()
-                deleted =  { 'deleted' : getId }
+                deleted =  { 'deleted' : qid }
                 return JsonResponse(deleted, status=200)
             else:
                 return JsonResponse({"error": "couldn't discern type"}, status=400)
