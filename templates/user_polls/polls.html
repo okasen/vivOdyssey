@@ -105,12 +105,13 @@
 					var field = instance[0]["fields"];
 					tr = document.createElement("tr");
 					qTable.appendChild(tr);
+					var id = "{{field.title}}"
 					tr.appendChild(td = document.createElement("td"));
-					td.innerHTML = "{{field.title}}";
+					td.innerHTML = id;
 					tr.appendChild(td = document.createElement("td"));
 					td.innerHTML = "{{field.text}}";
 					tr.appendChild(td = document.createElement("td"));
-					td.appendChild(this.createDeleteButton({{field.title}}));
+					td.appendChild(this.createDeleteButton(id));
 				},
 					error: function (response) {
 						// alert the error if any error occured
