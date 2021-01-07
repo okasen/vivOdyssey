@@ -126,7 +126,7 @@ function deleteFromDb(toDelete) {
 				xhr.setRequestHeader("X-CSRFToken", csrftoken);
 			},
 			data: {
-				'reqType': "Delete"
+				'reqType': "Delete",
 				'delId': toDelete
 			},
 		}).done(
