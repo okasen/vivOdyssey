@@ -40,6 +40,7 @@ class QAView(View):
         if self.request.is_ajax and self.request.method == "POST":
             requestType = self.request.POST['reqType']
             if requestType == "Post":
+                logger.debug('We know to post')
                 # get the form data
                 form = self.form_class(self.request.POST)
                 # save the data and after fetch the object in instance
