@@ -85,7 +85,10 @@ $(document).ready(function (){
 			$.ajax({
 				type: "POST",
 				url: "{% url "polls" %}",
-				data: serializedData,
+				data: {
+					'reqType': "Post",
+					'serData': serializedData,
+				}
 				success: function (response){
 					console.log("success");
 					$("#question-form").trigger('reset');
@@ -122,8 +125,8 @@ function deleteFromDb(toDelete) {
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("X-CSRFToken", csrftoken);
 			},
-			headers: { 'X_METHODOVERRIDE': 'DELETE' },
 			data: {
+				'reqType': "Delete"
 				'delId': toDelete
 			},
 		}).done(

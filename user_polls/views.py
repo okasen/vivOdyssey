@@ -30,7 +30,7 @@ class QAView(View):
     def post(self, *args, **kwargs):
         # request should be ajax and method should be POST.
         if self.request.is_ajax and self.request.method == "POST":
-            requestType = self.request.POST.get('reqType', None)
+            requestType = self.request.POST['reqType']
             if requestType == "Post":
                 # get the form data
                 form = self.form_class(self.request.POST)
