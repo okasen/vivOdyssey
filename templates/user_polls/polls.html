@@ -21,7 +21,7 @@
 <hr />
 
 <div class="container-fluid">
-	<table class="table table-striped table-sm" id="all_questions">
+	<table class="questionTable" id="all_questions">
 	</table>
 </div>
 {% endblock content %}
@@ -34,7 +34,11 @@ function createDeleteButton() {
 	deleteButton.className = 'deleteClass';
 	return deleteButton;
 }
-
+var pollsRows = document.querySelector(".questionTable")
+pollsRows.addEventListener('click', function(event) {
+console.log(event.target.parentNode.id);
+console.log(event.target.parentNode);
+});
 var qTable = document.getElementById("all_questions");
 var thead, tr, td;
 	qTable.appendChild(thead = document.createElement("thead"));
