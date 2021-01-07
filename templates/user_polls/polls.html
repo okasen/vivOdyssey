@@ -28,27 +28,20 @@
 
 {% block javascript %}
 <script>
-$(document).ready(function (){
-
-
-
 function createDeleteButton() {
-	var deleteButton = this.createElement('button');
+	var deleteButton = document.createElement('button');
 	deleteButton.textContent = 'delete';
 	deleteButton.className = 'deleteClass';
 	return deleteButton;
 }
-
-var pollsRows = document.querySelector(".questionTable");
-
+var pollsRows = document.querySelector(".questionTable")
 pollsRows.addEventListener('click', function(event) {
-	var elementClicked = event.target;
 
-	if (elementClicked.className === 'deleteClass'){
-		console.log(event.target.parentNode.parentNode);
-		trToDel = event.target.parentNode.parentNode;
-		trToDel.parentNode.removeChild(trToDel);
-	}
+var elementClicked = event.target;
+
+if (elementClicked.className === 'deleteClass'){
+	console.log(event.target.parentNode.parentNode);
+}
 });
 
 var qTable = document.getElementById("all_questions");
@@ -70,8 +63,10 @@ var thead, tr, td;
 	tr.appendChild(td = document.createElement("td"));
 	td.innerHTML = "{{question.text}}";
 	tr.appendChild(td = document.createElement("td"));
-	td.appendChild(document.createDeleteButton());
+	td.appendChild(this.createDeleteButton());
 {% endfor %}
+		
+$(document).ready(function (){		
 		
 function getCookie(name) {
     var cookieValue = null;
@@ -89,6 +84,11 @@ function getCookie(name) {
     return cookieValue;
 }
 var csrftoken = getCookie('csrftoken');
+
+
+
+$(document).ready(function (){
+
 
 	$("#question-form").submit(function (e) {
 		e.preventDefault();
@@ -112,7 +112,7 @@ var csrftoken = getCookie('csrftoken');
 				tr.appendChild(td = document.createElement("td"));
 				td.innerHTML = "{{field.text}}";
 				tr.appendChild(td = document.createElement("td"));
-				td.appendChild(document.createDeleteButton());
+				td.appendChild(this.createDeleteButton());
 			},
                 error: function (response) {
                     // alert the error if any error occured
