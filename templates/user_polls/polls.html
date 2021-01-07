@@ -37,11 +37,13 @@
 	var pollsRows = document.querySelector(".questionTable");
 	pollsRows.addEventListener('click', function(event) {
 
-	var elementClicked = event.target;
+		var elementClicked = event.target;
 
-	if (elementClicked.className === 'deleteClass'){
-		console.log(event.target.parentNode.parentNode);
-	}
+		if (elementClicked.className === 'deleteClass'){
+			console.log(event.target.parentNode.parentNode);
+			TrToDel = event.target.parentNode.parentNode;
+			TrToDel.parentNode.removeChild();
+		}
 	});
 
 	var qTable = document.getElementById("all_questions");
