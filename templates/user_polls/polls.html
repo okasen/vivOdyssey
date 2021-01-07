@@ -36,8 +36,13 @@ function createDeleteButton() {
 }
 var pollsRows = document.querySelector(".questionTable")
 pollsRows.addEventListener('click', function(event) {
-console.log(event.target.parentNode.id);
-console.log(event.target.parentNode);
+
+
+var elementClicked = event.target;
+
+if (elementClicked.className === 'deleteClass'){
+	console.log(event.target.parentNode.parentNode);
+}
 });
 var qTable = document.getElementById("all_questions");
 var thead, tr, td;
@@ -98,12 +103,14 @@ $(document).ready(function (){
 				
 				var instance = JSON.parse(response["instance"]);
 				var field = instance[0]["fields"];
-				$("#all_questions tbody").prepend(
-					`<tr>
-					<td>${field["title"]||""}</td>
-					<td>${field["text"]||""}</td>
-					</tr>`
-				)
+				tr = document.createElement("tr");
+				qTable.appendChild(tr);
+				tr.appendChild(td = document.createElement("td"));
+				td.innerHTML = ${field["title"]||""};
+				tr.appendChild(td = document.createElement("td"));
+				td.innerHTML = ${field["text"]||""};
+				tr.appendChild(td = document.createElement("td"));
+				td.appendChild(this.createDeleteButton());
 			},
                 error: function (response) {
                     // alert the error if any error occured
