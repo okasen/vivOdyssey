@@ -28,6 +28,10 @@
 
 {% block javascript %}
 <script>
+$(document).ready(function (){
+
+
+
 function createDeleteButton() {
 	var deleteButton = document.createElement('button');
 	deleteButton.textContent = 'delete';
@@ -35,9 +39,7 @@ function createDeleteButton() {
 	return deleteButton;
 }
 
-$(document).ready(function (){
-
-var pollsRows = document.querySelector(".questionTable")
+var pollsRows = document.querySelector(".questionTable");
 
 pollsRows.addEventListener('click', function(event) {
 	var elementClicked = event.target;
