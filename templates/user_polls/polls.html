@@ -28,10 +28,6 @@
 
 {% block javascript %}
 <script>
-$(document).ready(function (){
-
-
-
 function createDeleteButton() {
 	var deleteButton = document.createElement('button');
 	deleteButton.textContent = 'delete';
@@ -39,9 +35,19 @@ function createDeleteButton() {
 	return deleteButton;
 }
 
+$(document).ready(function (){
+
 var pollsRows = document.querySelector(".questionTable")
 
+pollsRows.addEventListener('click', function(event) {
+	var elementClicked = event.target;
 
+	if (elementClicked.className === 'deleteClass'){
+		console.log(event.target.parentNode.parentNode);
+		trToDel = event.target.parentNode.parentNode;
+		trToDel.parentNode.removeChild(trToDel);
+	}
+});
 
 var qTable = document.getElementById("all_questions");
 var thead, tr, td;
@@ -81,7 +87,6 @@ function getCookie(name) {
     return cookieValue;
 }
 var csrftoken = getCookie('csrftoken');
-
 
 	$("#question-form").submit(function (e) {
 		e.preventDefault();
