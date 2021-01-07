@@ -28,10 +28,11 @@
 
 {% block javascript %}
 <script>
-	function createDeleteButton() {
+	function createDeleteButton(rowId) {
 		var deleteButton = document.createElement('button');
 		deleteButton.textContent = 'delete';
 		deleteButton.className = 'deleteClass';
+		deleteButton.id = rowId;
 		return deleteButton;
 	}
 	var pollsRows = document.querySelector(".questionTable");
@@ -40,7 +41,7 @@
 		var elementClicked = event.target;
 
 		if (elementClicked.className === 'deleteClass'){
-			console.log(event.target.parentNode.parentNode);
+			console.log(event.target);
 			TrToDel = event.target.parentNode.parentNode;
 			TrToDel.parentNode.removeChild(TrToDel);
 		}
@@ -65,7 +66,7 @@
 		tr.appendChild(td = document.createElement("td"));
 		td.innerHTML = "{{question.text}}";
 		tr.appendChild(td = document.createElement("td"));
-		td.appendChild(this.createDeleteButton());
+		td.appendChild(this.createDeleteButton({{question.title}}));
 	{% endfor %}
 			
 	$(document).ready(function (){		
