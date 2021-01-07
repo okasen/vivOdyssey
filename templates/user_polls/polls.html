@@ -58,25 +58,25 @@ var thead, tr, td;
 	tr.appendChild(td = document.createElement("td"));
 	td.appendChild(this.createDeleteButton("{{question.title}}"));
 {% endfor %}
-			
-$(document).ready(function (){		
-			
-	function getCookie(name) {
-		var cookieValue = null;
-		if (document.cookie && document.cookie !== '') {
-			var cookies = document.cookie.split(';');
-			for (var i = 0; i < cookies.length; i++) {
-				var cookie = jQuery.trim(cookies[i]);
-				// Does this cookie string begin with the name we want?
-				if (cookie.substring(0, name.length + 1) === (name + '=')) {
-					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-					break;
-				}
+
+function getCookie(name) {
+	var cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = jQuery.trim(cookies[i]);
+			// Does this cookie string begin with the name we want?
+			if (cookie.substring(0, name.length + 1) === (name + '=')) {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
 			}
 		}
-		return cookieValue;
 	}
-	var csrftoken = getCookie('csrftoken');
+	return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+			
+$(document).ready(function (){		
 
 		$("#question-form").submit(function (e) {
 			e.preventDefault();
@@ -119,6 +119,7 @@ function deleteFromDb(toDelete) {
 		$.ajax({
 			type: "DELETE",
 			url: "{% url "polls" %}",
+			data: csrftoken,
 		}).done(
 			function(){alert("deleted");}
 			).fail(
