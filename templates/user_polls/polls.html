@@ -114,9 +114,6 @@ $(document).ready(function (){
 			if(confirm("are you sure you want to delete this question? ID: " + toDelete)){
 				$.ajax({
 					url: "{% url "polls" %}"
-					data: {
-						'csrfmiddlewaretoken': "{{ csrf_token }}"
-					},
 					type: "DELETE",
 					dataType: "json"
 				}).done(
