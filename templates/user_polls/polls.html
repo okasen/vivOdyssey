@@ -40,13 +40,13 @@ function createDeleteButton() {
 }
 var pollsRows = document.querySelector(".questionTable")
 pollsRows.addEventListener('click', function(event) {
+	var elementClicked = event.target;
 
-
-var elementClicked = event.target;
-
-if (elementClicked.className === 'deleteClass'){
-	console.log(event.target.parentNode.parentNode);
-}
+	if (elementClicked.className === 'deleteClass'){
+		console.log(event.target.parentNode.parentNode);
+		trToDel = event.target.parentNode.parentNode;
+		trToDel.parentNode.removeChild(trToDel);
+	}
 });
 var qTable = document.getElementById("all_questions");
 var thead, tr, td;
