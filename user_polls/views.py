@@ -48,7 +48,7 @@ class QAView(View):
                     form = self.form_class(self.request.POST)
                     id = self.request.POST.get('delId', None)
                     getId = get_object_or_404(Question, title = id)
-                    form.objects.filter(title=getId).delete()
+                    Question.objects.filter(title=getId).delete()
             else:
                 return JsonResponse({"error": "couldn't discern type"}, status=400)
             
