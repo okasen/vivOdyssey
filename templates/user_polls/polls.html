@@ -28,120 +28,115 @@
 
 {% block javascript %}
 <script>
-function createDeleteButton() {
-	var deleteButton = document.createElement('button');
-	deleteButton.textContent = 'delete';
-	deleteButton.className = 'deleteClass';
-	return deleteButton;
-}
-var pollsRows = document.querySelector(".questionTable");
-pollsRows.addEventListener('click', function(event) {
+	function createDeleteButton() {
+		var deleteButton = document.createElement('button');
+		deleteButton.textContent = 'delete';
+		deleteButton.className = 'deleteClass';
+		return deleteButton;
+	}
+	var pollsRows = document.querySelector(".questionTable");
+	pollsRows.addEventListener('click', function(event) {
 
-var elementClicked = event.target;
+	var elementClicked = event.target;
 
-if (elementClicked.className === 'deleteClass'){
-	console.log(event.target.parentNode.parentNode);
-}
-});
+	if (elementClicked.className === 'deleteClass'){
+		console.log(event.target.parentNode.parentNode);
+	}
+	});
 
-var qTable = document.getElementById("all_questions");
-var thead, tr, td;
-	qTable.appendChild(thead = document.createElement("thead"));
-	thead.appendChild(tr = document.createElement("tr"));
-	tr.appendChild(td = document.createElement("td"));
-	td.innerHTML = "Title";
-	tr.appendChild(td = document.createElement("td"));
-	td.innerHTML = "Description";
-	tr.appendChild(td = document.createElement("td"));
-	td.innerHTML = "Delete?";
+	var qTable = document.getElementById("all_questions");
+	var thead, tr, td;
+		qTable.appendChild(thead = document.createElement("thead"));
+		thead.appendChild(tr = document.createElement("tr"));
+		tr.appendChild(td = document.createElement("td"));
+		td.innerHTML = "Title";
+		tr.appendChild(td = document.createElement("td"));
+		td.innerHTML = "Description";
+		tr.appendChild(td = document.createElement("td"));
+		td.innerHTML = "Delete?";
 
-{% for question in questions %}
-	tr = document.createElement("tr");
-	qTable.appendChild(tr);
-	tr.appendChild(td = document.createElement("td"));
-	td.innerHTML = "{{question.title}}";
-	tr.appendChild(td = document.createElement("td"));
-	td.innerHTML = "{{question.text}}";
-	tr.appendChild(td = document.createElement("td"));
-	td.appendChild(this.createDeleteButton());
-{% endfor %}
-		
-$(document).ready(function (){		
-		
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
-
-
-
-$(document).ready(function (){
-
-
-	$("#question-form").submit(function (e) {
-		e.preventDefault();
-		var serializedData = $(this).serialize();
-		
-		$.ajax({
-			type: "POST",
-			url: "{% url "polls" %}",
-			data: serializedData,
-			success: function (response){
-				console.log("success");
-				$("#question-form").trigger('reset');
-				$("#id_question").focus();
-				
-				var instance = JSON.parse(response["instance"]);
-				var field = instance[0]["fields"];
-				tr = document.createElement("tr");
-				qTable.appendChild(tr);
-				tr.appendChild(td = document.createElement("td"));
-				td.innerHTML = "{{field.title}}";
-				tr.appendChild(td = document.createElement("td"));
-				td.innerHTML = "{{field.text}}";
-				tr.appendChild(td = document.createElement("td"));
-				td.appendChild(this.createDeleteButton());
-			},
-                error: function (response) {
-                    // alert the error if any error occured
-                    alert(response["responseJSON"]["error"]);
-			}
-		})
-	})
-	
-	$("#id_question").focusout(function (e) {
-		e.preventDefault();
-		var question_title = $(this).val();
-		$.ajax({
-			type: 'GET',
-			url: "{% url 'receive_Question' %}",
-			data: {"question_title": question_title},
-			success: function (response) {
-				if(!response["valid"]){
-					alert("Question with this title already exists");
-					var questionTitle = $("#id_question");
-					questionTitle.val("");
-					questionTitle.focus();
+	{% for question in questions %}
+		tr = document.createElement("tr");
+		qTable.appendChild(tr);
+		tr.appendChild(td = document.createElement("td"));
+		td.innerHTML = "{{question.title}}";
+		tr.appendChild(td = document.createElement("td"));
+		td.innerHTML = "{{question.text}}";
+		tr.appendChild(td = document.createElement("td"));
+		td.appendChild(this.createDeleteButton());
+	{% endfor %}
+			
+	$(document).ready(function (){		
+			
+	function getCookie(name) {
+		var cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+			var cookies = document.cookie.split(';');
+			for (var i = 0; i < cookies.length; i++) {
+				var cookie = jQuery.trim(cookies[i]);
+				// Does this cookie string begin with the name we want?
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
 				}
-			},
-			error: function (response) {
-				console.log(response);
 			}
+		}
+		return cookieValue;
+	}
+	var csrftoken = getCookie('csrftoken');
+
+		$("#question-form").submit(function (e) {
+			e.preventDefault();
+			var serializedData = $(this).serialize();
+			
+			$.ajax({
+				type: "POST",
+				url: "{% url "polls" %}",
+				data: serializedData,
+				success: function (response){
+					console.log("success");
+					$("#question-form").trigger('reset');
+					$("#id_question").focus();
+					
+					var instance = JSON.parse(response["instance"]);
+					var field = instance[0]["fields"];
+					tr = document.createElement("tr");
+					qTable.appendChild(tr);
+					tr.appendChild(td = document.createElement("td"));
+					td.innerHTML = "{{field.title}}";
+					tr.appendChild(td = document.createElement("td"));
+					td.innerHTML = "{{field.text}}";
+					tr.appendChild(td = document.createElement("td"));
+					td.appendChild(this.createDeleteButton());
+				},
+					error: function (response) {
+						// alert the error if any error occured
+						alert(response["responseJSON"]["error"]);
+				}
+			})
 		})
-	})
-});
+		
+		$("#id_question").focusout(function (e) {
+			e.preventDefault();
+			var question_title = $(this).val();
+			$.ajax({
+				type: 'GET',
+				url: "{% url 'receive_Question' %}",
+				data: {"question_title": question_title},
+				success: function (response) {
+					if(!response["valid"]){
+						alert("Question with this title already exists");
+						var questionTitle = $("#id_question");
+						questionTitle.val("");
+						questionTitle.focus();
+					}
+				},
+				error: function (response) {
+					console.log(response);
+				}
+			})
+		})
+	});
 </script>
 {% endblock javascript %}
 	
