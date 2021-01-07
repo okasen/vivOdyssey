@@ -30,27 +30,26 @@ class QAView(View):
     def post(self, *args, **kwargs):
         # request should be ajax and method should be POST.
         if self.request.is_ajax and self.request.method == "POST":
-            # get the form data
-            form = self.form_class(self.request.POST)
-            # save the data and after fetch the object in instance
-            if form.is_valid():
-                instance = form.save()
-                # serialize in new friend object in json
-                ser_instance = serializers.serialize('json', [ instance, ])
-                # send to client side.
-                return JsonResponse({"instance": ser_instance}, status=200)
+            if self.request['reqType'] == "Post":
+                # get the form data
+                form = self.form_class(self.request.POST)
+                # save the data and after fetch the object in instance
+                if form.is_valid():
+                    instance = form.save()
+                    # serialize in new friend object in json
+                    ser_instance = serializers.serialize('json', [ instance, ])
+                    # send to client side.
+                    return JsonResponse({"instance": ser_instance}, status=200)
+                else:
+                    # some form errors occured.
+                    return JsonResponse({"error": form.errors}, status=400)
+            elif self.request['reqType'] == "Delete":
+                    form = self.form_class(self.request.POST)
+                    id = self.request.POST.get('delId', None)
+                    getId = get_object_or_404(Question, title = id)
+                    form.objects.filter(title=getId).delete()
             else:
-                # some form errors occured.
-                return JsonResponse({"error": form.errors}, status=400)
-
-        return JsonResponse({"error": ""}, status=400)
-
-    def delete(self, *args, **kwargs):
-        if self.request.is_ajax and self.request.method == "DELETE":
-            form = self.form_class(self.request.POST)
-            id = self.request.POST.get('delId', None)
-            getId = get_object_or_404(Question, title = id)
-            form.objects.filter(title=getId).delete()            
+                return JsonResponse({"error": "couldn't discern type"}, status=400)
             
             
 
