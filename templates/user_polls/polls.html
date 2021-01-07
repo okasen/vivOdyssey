@@ -115,10 +115,11 @@ $(document).ready(function (){
 	});
 	
 function deleteFromDb(toDelete) {
+	var direction = "{% url "polls" %}"
 	if(confirm("are you sure you want to delete this question? ID: " + toDelete)){
 		$.ajax({
 			type: "DELETE",
-			url: "{% url "polls" %}",
+			url: direction,
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("X-CSRFToken", csrftoken);
 			},
