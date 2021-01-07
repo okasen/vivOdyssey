@@ -36,16 +36,6 @@ function createDeleteButton(rowId) {
 	return deleteButton;
 }
 var pollsRows = document.querySelector(".questionTable");
-pollsRows.addEventListener('click', function(event) {
-
-	var elementClicked = event.target;
-
-	if (elementClicked.className === 'deleteClass'){
-		console.log(event.target);
-		TrToDel = event.target.parentNode.parentNode;
-		TrToDel.parentNode.removeChild(TrToDel);
-	}
-});
 
 var qTable = document.getElementById("all_questions");
 var thead, tr, td;
@@ -141,6 +131,34 @@ $(document).ready(function (){
 			})
 		})
 	});
+	
+function deleteFromDb(toDelete) {
+	if(confirm("are you sure you want to delete this question? ID: " + toDelete));
+		$.ajax({
+			url: "{% url "polls" %}"
+			data: {
+				'csrfmiddlewaretoken': "{{ csrf_token }}"
+			},
+			type: "DELETE",
+			dataType: "json"
+		}).done(
+			function(){alert("deleted");}
+			).fail(
+				function(){alert("error. Did not delete");}
+			)
+}
+	
+pollsRows.addEventListener('click', function(event) {
+
+	var elementClicked = event.target;
+
+	if (elementClicked.className === 'deleteClass'){
+		console.log(event.target);
+		TrToDel = event.target.parentNode.parentNode;
+		TrToDel.parentNode.removeChild(TrToDel);
+		deleteFromDb(event.target.id);
+	}
+});
 </script>
 {% endblock javascript %}
 	
