@@ -122,7 +122,9 @@ function deleteFromDb(toDelete) {
 			beforeSend: function(xhr) {
 				xhr.setRequestHeader("X-CSRFToken", csrftoken);
 			},
-			data: toDelete
+			data: {
+				id: toDelete
+			},
 		}).done(
 			function(){alert("deleted");}
 			).fail(
