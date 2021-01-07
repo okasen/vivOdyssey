@@ -29,7 +29,7 @@ class QAView(View):
 
     def post(self, *args, **kwargs):
         # request should be ajax and method should be POST.
-        if self.request.is_ajax and self.request.method == "POST" and http_method.lower() == 'post':
+        if self.request.is_ajax and self.request.method == "POST":
             # get the form data
             form = self.form_class(self.request.POST)
             # save the data and after fetch the object in instance
@@ -46,7 +46,7 @@ class QAView(View):
         return JsonResponse({"error": ""}, status=400)
 
     def delete(self, *args, **kwargs):
-        if self.request.is_ajax and self.request.method == "POST" and http_method.lower() == 'delete':
+        if self.request.is_ajax and self.request.method == "DELETE":
             form = self.form_class(self.request.POST)
             id = self.request.POST.get('delId', None)
             getId = get_object_or_404(Question, title = id)
