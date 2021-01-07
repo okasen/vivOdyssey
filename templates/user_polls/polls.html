@@ -105,11 +105,11 @@ $(document).ready(function (){
 					var field = instance[0]["fields"];
 					tr = document.createElement("tr");
 					qTable.appendChild(tr);
-					var id = $field["title"]||"";
+					var id = field["title"]||"";
 					tr.appendChild(td = document.createElement("td"));
 					td.innerHTML = id;
 					tr.appendChild(td = document.createElement("td"));
-					td.innerHTML = $field["title"]||"";
+					td.innerHTML = field["title"]||"";
 					tr.appendChild(td = document.createElement("td"));
 					td.appendChild(createDeleteButton(id));
 				},
