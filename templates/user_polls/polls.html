@@ -70,7 +70,7 @@ var thead, tr, td;
 	tr.appendChild(td = document.createElement("td"));
 	td.innerHTML = "{{question.text}}";
 	tr.appendChild(td = document.createElement("td"));
-	td.appendChild(this.createDeleteButton());
+	td.appendChild(document.createDeleteButton());
 {% endfor %}
 		
 function getCookie(name) {
@@ -112,7 +112,7 @@ var csrftoken = getCookie('csrftoken');
 				tr.appendChild(td = document.createElement("td"));
 				td.innerHTML = "{{field.text}}";
 				tr.appendChild(td = document.createElement("td"));
-				td.appendChild(this.createDeleteButton());
+				td.appendChild(document.createDeleteButton());
 			},
                 error: function (response) {
                     // alert the error if any error occured
