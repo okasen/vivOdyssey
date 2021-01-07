@@ -42,7 +42,7 @@
 		if (elementClicked.className === 'deleteClass'){
 			console.log(event.target.parentNode.parentNode);
 			TrToDel = event.target.parentNode.parentNode;
-			TrToDel.parentNode.removeChild();
+			TrToDel.parentNode.removeChild(TrToDel);
 		}
 	});
 
