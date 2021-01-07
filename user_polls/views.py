@@ -6,6 +6,13 @@ from .models import Question
 from django.urls import reverse_lazy
 from django.views import View
 
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
+
 # Create your views here.
 
 def receiveQuestion(request):
@@ -46,11 +53,11 @@ class QAView(View):
                     # some form errors occured.
                     return JsonResponse({"error": form.errors}, status=400)
             elif requestType == "Delete":
+                logger.debug('We know to delete')
                 qClass = self.model_class()
                 qid = self.request.POST.get('delId', None)
                 getId = get_object_or_404(Question, title = qid)
-                Question.objects.filter(title=getId).delete(using=DEFAULT_DB_ALIAS,keep_parents=False)
-                qClass.save()
+                Question.objects.filter(title=getId).delete()
                 deleted = { 'deleted' : qid }
                 return JsonResponse(deleted, status=200)
             else:
