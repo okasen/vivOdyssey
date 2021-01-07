@@ -113,9 +113,8 @@ $(document).ready(function (){
 		function deleteFromDb(toDelete) {
 			if(confirm("are you sure you want to delete this question? ID: " + toDelete)){
 				$.ajax({
-					url: "{% url "polls" %}"
 					type: "DELETE",
-					dataType: "json"
+					url: "{% url "polls" %}",
 				}).done(
 					function(){alert("deleted");}
 					).fail(
@@ -135,7 +134,7 @@ pollsRows.addEventListener('click', function(event) {
 		console.log(event.target);
 		TrToDel = event.target.parentNode.parentNode;
 		TrToDel.parentNode.removeChild(TrToDel);
-		deleteFromDb(event.target.id);
+		document.deleteFromDb(event.target.id);
 	}
 });
 </script>
