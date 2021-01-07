@@ -38,16 +38,11 @@ function createDeleteButton() {
 	deleteButton.className = 'deleteClass';
 	return deleteButton;
 }
-var pollsRows = document.querySelector(".questionTable")
-pollsRows.addEventListener('click', function(event) {
-	var elementClicked = event.target;
 
-	if (elementClicked.className === 'deleteClass'){
-		console.log(event.target.parentNode.parentNode);
-		trToDel = event.target.parentNode.parentNode;
-		trToDel.parentNode.removeChild(trToDel);
-	}
-});
+var pollsRows = document.querySelector(".questionTable")
+
+
+
 var qTable = document.getElementById("all_questions");
 var thead, tr, td;
 	qTable.appendChild(thead = document.createElement("thead"));
