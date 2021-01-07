@@ -109,23 +109,26 @@ $(document).ready(function (){
 				}
 			})
 		})
-	});
+		
+		function deleteFromDb(toDelete) {
+			if(confirm("are you sure you want to delete this question? ID: " + toDelete)){
+				$.ajax({
+					url: "{% url "polls" %}"
+					data: {
+						'csrfmiddlewaretoken': "{{ csrf_token }}"
+					},
+					type: "DELETE",
+					dataType: "json"
+				}).done(
+					function(){alert("deleted");}
+					).fail(
+						function(){alert("error. Did not delete");}
+					)
+				}
+		
+		}
 	
-function deleteFromDb(toDelete) {
-	if(confirm("are you sure you want to delete this question? ID: " + toDelete));
-		$.ajax({
-			url: "{% url "polls" %}"
-			data: {
-				'csrfmiddlewaretoken': "{{ csrf_token }}"
-			},
-			type: "DELETE",
-			dataType: "json"
-		}).done(
-			function(){alert("deleted");}
-			).fail(
-				function(){alert("error. Did not delete");}
-			)
-}
+	});
 	
 pollsRows.addEventListener('click', function(event) {
 
