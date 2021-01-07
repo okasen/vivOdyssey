@@ -51,8 +51,8 @@ class QAView(View):
                 getId = get_object_or_404(Question, title = qid)
                 Question.objects.filter(title=getId).delete()
                 qClass.save()
-                ser_instance = serializers.serialize('json', [ instance, ])
-                return JsonResponse(ser_instance, status=200)
+                deleted =  { 'deleted' : getId }
+                return JsonResponse(deleted, status=200)
             else:
                 return JsonResponse({"error": "couldn't discern type"}, status=400)
             
