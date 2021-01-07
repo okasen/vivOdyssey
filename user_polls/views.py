@@ -47,8 +47,8 @@ class QAView(View):
                     return JsonResponse({"error": form.errors}, status=400)
             elif requestType == "Delete":
                     qClass = self.model_class(self.request.POST)
-                    id = self.request.POST.get('delId', None)
-                    getId = get_object_or_404(Question, title = id)
+                    qid = self.request.POST.get('delId', None)
+                    getId = get_object_or_404(Question, title = qid)
                     Question.objects.filter(title=getId).delete()
                     instance = qClass.save()
                     ser_instance = serializers.serialize('json', [ instance, ])
