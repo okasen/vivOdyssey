@@ -49,8 +49,8 @@ class QAView(View):
                 qClass = self.model_class()
                 qid = self.request.POST.get('delId', None)
                 getId = get_object_or_404(Question, title = qid)
-                Question.objects.filter(title=getId).delete()
-                instance = Question.save()
+                qClass.objects.filter(title=getId).delete()
+                instance = qClass.save()
                 ser_instance = serializers.serialize('json', [ instance, ])
                 return JsonResponse(ser_instance, status=200)
             else:
