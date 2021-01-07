@@ -66,7 +66,7 @@
 		tr.appendChild(td = document.createElement("td"));
 		td.innerHTML = "{{question.text}}";
 		tr.appendChild(td = document.createElement("td"));
-		td.appendChild(this.createDeleteButton({{question.title}}));
+		td.appendChild(this.createDeleteButton("{{question.title}}"));
 	{% endfor %}
 			
 	$(document).ready(function (){		
@@ -110,7 +110,7 @@
 					tr.appendChild(td = document.createElement("td"));
 					td.innerHTML = "{{field.text}}";
 					tr.appendChild(td = document.createElement("td"));
-					td.appendChild(this.createDeleteButton());
+					td.appendChild(this.createDeleteButton("{{field.title}}"));
 				},
 					error: function (response) {
 						// alert the error if any error occured
