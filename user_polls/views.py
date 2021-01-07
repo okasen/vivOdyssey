@@ -49,7 +49,7 @@ class QAView(View):
                     id = self.request.POST.get('delId', None)
                     getId = get_object_or_404(Question, title = id)
                     Question.objects.filter(title=getId).delete()
-                    jDict = {'deleted': getId}
+                    jDict = {'deleted': id}
                     return JsonResponse(jDict, status=200)
             else:
                 return JsonResponse({"error": "couldn't discern type"}, status=400)
