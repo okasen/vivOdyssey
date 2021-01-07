@@ -109,27 +109,6 @@ $(document).ready(function (){
 				}
 			})
 		})
-		
-		$("#id_question").focusout(function (e) {
-			e.preventDefault();
-			var question_title = $(this).val();
-			$.ajax({
-				type: 'GET',
-				url: "{% url 'receive_Question' %}",
-				data: {"question_title": question_title},
-				success: function (response) {
-					if(!response["valid"]){
-						alert("Question with this title already exists");
-						var questionTitle = $("#id_question");
-						questionTitle.val("");
-						questionTitle.focus();
-					}
-				},
-				error: function (response) {
-					console.log(response);
-				}
-			})
-		})
 	});
 	
 function deleteFromDb(toDelete) {
