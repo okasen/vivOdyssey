@@ -49,9 +49,8 @@ class QAView(View):
                     id = self.request.POST.get('delId', None)
                     getId = get_object_or_404(Question, title = id)
                     Question.filter(title=getId).delete()
-                    instance = form.save()
+                    instance = Question.save()
                     ser_instance = serializers.serialize('json', [ instance, ])
-                    jDict = {'deleted': id}
                     return JsonResponse(ser_instance, status=200)
             else:
                 return JsonResponse({"error": "couldn't discern type"}, status=400)
