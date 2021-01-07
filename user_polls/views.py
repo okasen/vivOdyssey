@@ -21,6 +21,7 @@ def receiveQuestion(request):
 
 class QAView(View):
     form_class = QuestionCreate
+    model_class = Question
     template_name = 'user_polls/polls.html'
     def get(self, *args, **kwargs):
         form = self.form_class()
@@ -45,11 +46,11 @@ class QAView(View):
                     # some form errors occured.
                     return JsonResponse({"error": form.errors}, status=400)
             elif requestType == "Delete":
-                    form = self.form_class(self.request.POST)
+                    qClass = self.model_class(self.request.POST)
                     id = self.request.POST.get('delId', None)
                     getId = get_object_or_404(Question, title = id)
                     Question.objects.filter(title=getId).delete()
-                    instance = self.Question.save()
+                    instance = qClass.save()
                     ser_instance = serializers.serialize('json', [ instance, ])
                     return JsonResponse(ser_instance, status=200)
             else:
