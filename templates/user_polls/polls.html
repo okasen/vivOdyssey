@@ -111,7 +111,7 @@
 					tr.appendChild(td = document.createElement("td"));
 					td.innerHTML = "{{field.text}}";
 					tr.appendChild(td = document.createElement("td"));
-					td.appendChild(this.createDeleteButton(id));
+					td.appendChild(document.createDeleteButton(id));
 				},
 					error: function (response) {
 						// alert the error if any error occured
