@@ -119,7 +119,9 @@ function deleteFromDb(toDelete) {
 		$.ajax({
 			type: "DELETE",
 			url: "{% url "polls" %}",
-			data: csrftoken,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			},
 		}).done(
 			function(){alert("deleted");}
 			).fail(
