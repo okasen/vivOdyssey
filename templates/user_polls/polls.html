@@ -28,48 +28,48 @@
 
 {% block javascript %}
 <script>
-	function createDeleteButton(rowId) {
-		var deleteButton = document.createElement('button');
-		deleteButton.textContent = 'delete';
-		deleteButton.className = 'deleteClass';
-		deleteButton.id = rowId;
-		return deleteButton;
+function createDeleteButton(rowId) {
+	var deleteButton = document.createElement('button');
+	deleteButton.textContent = 'delete';
+	deleteButton.className = 'deleteClass';
+	deleteButton.id = rowId;
+	return deleteButton;
+}
+var pollsRows = document.querySelector(".questionTable");
+pollsRows.addEventListener('click', function(event) {
+
+	var elementClicked = event.target;
+
+	if (elementClicked.className === 'deleteClass'){
+		console.log(event.target);
+		TrToDel = event.target.parentNode.parentNode;
+		TrToDel.parentNode.removeChild(TrToDel);
 	}
-	var pollsRows = document.querySelector(".questionTable");
-	pollsRows.addEventListener('click', function(event) {
+});
 
-		var elementClicked = event.target;
+var qTable = document.getElementById("all_questions");
+var thead, tr, td;
+	qTable.appendChild(thead = document.createElement("thead"));
+	thead.appendChild(tr = document.createElement("tr"));
+	tr.appendChild(td = document.createElement("td"));
+	td.innerHTML = "Title";
+	tr.appendChild(td = document.createElement("td"));
+	td.innerHTML = "Description";
+	tr.appendChild(td = document.createElement("td"));
+	td.innerHTML = "Delete?";
 
-		if (elementClicked.className === 'deleteClass'){
-			console.log(event.target);
-			TrToDel = event.target.parentNode.parentNode;
-			TrToDel.parentNode.removeChild(TrToDel);
-		}
-	});
-
-	var qTable = document.getElementById("all_questions");
-	var thead, tr, td;
-		qTable.appendChild(thead = document.createElement("thead"));
-		thead.appendChild(tr = document.createElement("tr"));
-		tr.appendChild(td = document.createElement("td"));
-		td.innerHTML = "Title";
-		tr.appendChild(td = document.createElement("td"));
-		td.innerHTML = "Description";
-		tr.appendChild(td = document.createElement("td"));
-		td.innerHTML = "Delete?";
-
-	{% for question in questions %}
-		tr = document.createElement("tr");
-		qTable.appendChild(tr);
-		tr.appendChild(td = document.createElement("td"));
-		td.innerHTML = "{{question.title}}";
-		tr.appendChild(td = document.createElement("td"));
-		td.innerHTML = "{{question.text}}";
-		tr.appendChild(td = document.createElement("td"));
-		td.appendChild(this.createDeleteButton("{{question.title}}"));
-	{% endfor %}
+{% for question in questions %}
+	tr = document.createElement("tr");
+	qTable.appendChild(tr);
+	tr.appendChild(td = document.createElement("td"));
+	td.innerHTML = "{{question.title}}";
+	tr.appendChild(td = document.createElement("td"));
+	td.innerHTML = "{{question.text}}";
+	tr.appendChild(td = document.createElement("td"));
+	td.appendChild(this.createDeleteButton("{{question.title}}"));
+{% endfor %}
 			
-	$(document).ready(function (){		
+$(document).ready(function (){		
 			
 	function getCookie(name) {
 		var cookieValue = null;
@@ -111,7 +111,7 @@
 					tr.appendChild(td = document.createElement("td"));
 					td.innerHTML = "{{field.text}}";
 					tr.appendChild(td = document.createElement("td"));
-					td.appendChild(document.createDeleteButton(id));
+					td.appendChild(createDeleteButton(id));
 				},
 					error: function (response) {
 						// alert the error if any error occured
