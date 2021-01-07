@@ -46,7 +46,7 @@ class QAView(View):
                     # some form errors occured.
                     return JsonResponse({"error": form.errors}, status=400)
             elif requestType == "Delete":
-                    qClass = self.model_class(self.request.POST)
+                    qClass = self.form_class(self.request.POST)
                     qid = self.request.POST.get('delId', None)
                     getId = get_object_or_404(Question, title = qid)
                     Question.objects.filter(title=getId).delete()
