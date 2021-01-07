@@ -46,13 +46,13 @@ class QAView(View):
                     # some form errors occured.
                     return JsonResponse({"error": form.errors}, status=400)
             elif requestType == "Delete":
-                    qClass = self.form_class(self.request.POST)
-                    qid = self.request.POST.get('delId', None)
-                    getId = get_object_or_404(Question, title = qid)
-                    Question.objects.filter(title=getId).delete()
-                    instance = qClass.save()
-                    ser_instance = serializers.serialize('json', [ instance, ])
-                    return JsonResponse(ser_instance, status=200)
+                qClass = self.model_class()
+                qid = self.request.POST.get('delId', None)
+                getId = get_object_or_404(Question, title = qid)
+                Question.objects.filter(title=getId).delete()
+                instance = Question.save()
+                ser_instance = serializers.serialize('json', [ instance, ])
+                return JsonResponse(ser_instance, status=200)
             else:
                 return JsonResponse({"error": "couldn't discern type"}, status=400)
             
