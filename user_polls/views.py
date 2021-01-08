@@ -67,7 +67,7 @@ class QAView(UserPassesTestMixin, View):
                     return JsonResponse({"instance": ser_instance}, status=200)
                 else:
                     # some form errors occured.
-                    return JsonResponse({"error": form.errors}, status=400)
+                    return JsonResponse({"error": "oh no, but we knew to post"}, status=400)
             elif requestType == "Delete":
                 logger.debug('We know to delete')
                 qClass = self.model_class()
