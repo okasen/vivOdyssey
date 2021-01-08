@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import View
 
 # import the logging library
-from django.settings import logging
+import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
