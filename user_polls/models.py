@@ -1,5 +1,7 @@
 from django.db import models
 from accounts.models import Player
+from datetime import datetime
+import pytz
 
 # Create your models here.
 
@@ -8,13 +10,17 @@ from accounts.models import Player
 #users need to be able to see and maybe edit answers
 #I need to be able to see the answers
 
+tz = pytz.timezone('UTC')
+
 class Question(models.Model):
     title = models.CharField(max_length=100)
     text = models.CharField('short description of the question', max_length=280)
     
 class Answer(models.Model):
-    user = models.ForeignKey(Player, on_delete=models.CASCADE)
+    user = Player
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer = models.TextField('Give your input')
-    date_answered = models.DateTimeField('User answered at this time')
+    date_answered = datetime.now(tz)
+
+    exclude = ['user', 'date_answered']
     

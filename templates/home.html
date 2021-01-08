@@ -19,8 +19,11 @@
 	</div>
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
+{% if user.is_moderator %}
+You are a moderator
+{% endif %}
   		<div class="column" align="center">
-		  <a href="{% url 'polls' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="Answer poll" width="100%"><br>Answer polls</a>
+		  <a href="{% url 'answer' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="Answer poll" width="100%"><br>Answer polls</a>
 		</div>
   <p><a href="{% url 'logout' %}">Log Out</a></p>
   <p><a href="{% url 'password_reset' %}">Reset Password</a></p>

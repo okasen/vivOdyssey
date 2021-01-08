@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.core import serializers
-from .forms import QuestionCreate
-from .models import Question
+from .forms import QuestionCreate, AnswerForm
+from .models import Question, Answer
 from django.urls import reverse_lazy
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # import the logging library
 import logging
@@ -14,6 +15,16 @@ logger = logging.getLogger(__name__)
 
 
 # Create your views here.
+
+class AnswerView(View):
+    form_class = AnswerForm
+    model_class = Answer
+    template_name = 'user_polls/polls/answer.html'
+    def get(self, *args, **kwargs):
+        form = self.form_class()
+        questions = Question.objects.all()
+        return render(self.request, self.template_name, {"form": form, "questions": questions})
+
 
 def receiveQuestion(request):
     if request.is_ajax and request.method == "GET":
@@ -25,11 +36,14 @@ def receiveQuestion(request):
 
     return JsonResponse({}, status = 400)
 
-
-class QAView(View):
+class QAView(UserPassesTestMixin, View):
+    
+    def test_func(self):
+        return self.request.user.groups.filter(name = "moderators")
+    
     form_class = QuestionCreate
     model_class = Question
-    template_name = 'user_polls/polls.html'
+    template_name = 'user_polls/polls/moderation.html'
     def get(self, *args, **kwargs):
         form = self.form_class()
         questions = Question.objects.all()
