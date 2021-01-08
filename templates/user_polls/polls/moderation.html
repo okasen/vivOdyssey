@@ -85,7 +85,13 @@ $(document).ready(function (){
 			$.ajax({
 				type: "POST",
 				url: "{% url "moderation" %}",
-				data: serializedData,
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				},
+				data: {
+					'reqType': "Post",
+					'serData': serializedData,
+				},
 				success: function (response){
 					console.log("success");
 					$("#question-form").trigger('reset');
