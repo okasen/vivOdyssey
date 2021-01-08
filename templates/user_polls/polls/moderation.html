@@ -85,10 +85,7 @@ $(document).ready(function (){
 			$.ajax({
 				type: "POST",
 				url: "{% url "moderation" %}",
-				data: {
-					'reqType': "Post",
-					'serData': serializedData,
-				},
+				data: serializedData,
 				success: function (response){
 					console.log("success");
 					$("#question-form").trigger('reset');
