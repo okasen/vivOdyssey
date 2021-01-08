@@ -59,7 +59,7 @@ class QAView(View):
                 qClass = self.model_class()
                 qid = self.request.POST.get('delId', None)
                 getId = get_object_or_404(Question, title = qid)
-                Question.objects.filter(title=getId).delete()
+                getId.delete()
                 deleted = { 'deleted' : qid }
                 return JsonResponse(deleted, status=200)
             else:
