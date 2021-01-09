@@ -57,7 +57,7 @@ class QAView(UserPassesTestMixin, View):
             if requestType == "Post":
                 logger.debug('We know to post')
                 # get the form data
-                form = self.form_class(self.request.POST)
+                form = self.form_class(self.request.POST['serData'])
                 # save the data and after fetch the object in instance
                 if form.is_valid():
                     instance = form.save()
