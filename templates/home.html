@@ -18,7 +18,7 @@
 	  <p><a href="{% url 'about' %}"><img src="{% static 'images/eggs/plain.png' %}" alt="About Viv Odyssey" width="50%"><br>About Viv Odyssey</a></p>
 	</div>
 {% if user.is_authenticated %}
-  Hi {{ user.username }}! <p>Play a <a href="{% url 'play fishing' %}">game?</a></p>
+  Hi {{ user.username }}! <p>Play a <a href="{% url 'playfishing' %}">game?</a></p>
   		<div class="column" align="center">
 		  <a href="{% url 'all' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="Answer poll" width="100%"><br>Answer polls</a>
 		</div>
