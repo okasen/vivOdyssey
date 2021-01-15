@@ -1,4 +1,3 @@
-<script>
 function createDeleteButton(rowId) {
 	var deleteButton = document.createElement('button');
 	deleteButton.textContent = 'delete';
@@ -46,13 +45,13 @@ function getCookie(name) {
 	return cookieValue;
 }
 var csrftoken = getCookie('csrftoken');
-			
-$(document).ready(function (){		
+
+$(document).ready(function (){
 
 		$("#question-form").submit(function (e) {
 			e.preventDefault();
 			var serializedData = $(this).serialize();
-			
+
 			$.ajax({
 				type: "POST",
 				url: "{% url "moderation" %}",
@@ -67,7 +66,7 @@ $(document).ready(function (){
 					console.log("success");
 					$("#question-form").trigger('reset');
 					$("#id_question").focus();
-					
+
 					var instance = JSON.parse(response["instance"]);
 					var field = instance[0]["fields"];
 					tr = document.createElement("tr");
@@ -86,11 +85,11 @@ $(document).ready(function (){
 				}
 			})
 		})
-		
 
-	
+
+
 	});
-	
+
 function deleteFromDb(toDelete) {
 	if(confirm("are you sure you want to delete this question? ID: " + toDelete)){
 		$.ajax({
@@ -113,7 +112,7 @@ function deleteFromDb(toDelete) {
 		}
 
 }
-	
+
 pollsRows.addEventListener('click', function(event) {
 
 	var elementClicked = event.target;
@@ -125,4 +124,3 @@ pollsRows.addEventListener('click', function(event) {
 		deleteFromDb(event.target.id);
 	}
 });
-</script>
