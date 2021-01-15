@@ -1,6 +1,6 @@
 from .models import Question, Answer
 from django import forms
-import datetime
+from django.utils import timezone
 
 class QuestionCreate(forms.ModelForm): #should only be accessible by admin or moderator
     def __init__(self, *args, **kwargs):
@@ -17,3 +17,5 @@ class AnswerForm(forms.ModelForm): #accessible by anyone logged in
     class Meta:
         model = Answer
         fields = ("__all__")
+
+        exclude = ['date_answered', 'user', 'question']

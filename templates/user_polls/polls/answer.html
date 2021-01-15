@@ -1,20 +1,30 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <div class="container-fluid">
-	<form id="question-form">
+	<form method="post" id="answer-form">
 		<div class="row">
 			{% csrf_token %}
-			{% for field in form %}
 			<div class="form-group col-4">
-				<label class="col-12">{{ field.label }}</label>
-				{{ field }}
+				<h2><label class="col-12">{{ question.title }}</label></h2>
+				<p>
+				{{ question.text }}
+				</p>
+				<p>
+					<a href={% url "answers" %}>View answers you've given</a>
+				</p>
+				{% for field in form %}
+				<p>
+					{{ field }}
+				</p>
+				{% endfor %}
 			</div>
-			{% endfor %}
 			
 			<div class = "col text-center">
-			<input type="submit" class="btn btn-primary" value="Create Question" />
+			<input type="submit" class="btn" value="Answer Question" />
 		</div>
 	</form>
 </div>
@@ -24,4 +34,6 @@
 	<table class="questionTable" id="all_questions">
 	</table>
 </div>
+<script type="text/javascript" src="{% static "answerform.js" %}">
 {% endblock content %}
+	

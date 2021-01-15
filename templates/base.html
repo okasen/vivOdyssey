@@ -4,8 +4,10 @@
 {% load static %}
 <html>
 <head>
+  {% block css %}
+  {% endblock %}
 <script type="text/javascript" src="{% static "jquery.js" %}">
-</script> 
+</script>
   <meta charset="utf-8">
   <title>{% block title %}Viv Odyssey{% endblock %}</title>
 </head>
@@ -16,11 +18,11 @@
   <div align=center>
   <h1><a href="{% url 'home' %}">Viv Odyssey</a></h1>
     {% block content %}
-    {% endblock %} 
+    {% endblock %}
 	{% block javascript %}
 	{% endblock %}
   </div>
   </main>
-	
+
 </body>
 </html>

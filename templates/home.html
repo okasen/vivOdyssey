@@ -18,24 +18,21 @@
 	  <p><a href="{% url 'about' %}"><img src="{% static 'images/eggs/plain.png' %}" alt="About Viv Odyssey" width="50%"><br>About Viv Odyssey</a></p>
 	</div>
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-{% if user.is_moderator %}
-You are a moderator
-{% endif %}
+  Hi {{ user.username }}! <p>Play a <a href="{% url 'play fishing' %}">game?</a></p>
   		<div class="column" align="center">
-		  <a href="{% url 'answer' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="Answer poll" width="100%"><br>Answer polls</a>
+		  <a href="{% url 'all' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="Answer poll" width="100%"><br>Answer polls</a>
 		</div>
   <p><a href="{% url 'logout' %}">Log Out</a></p>
   <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
  </div>
 {% else %}
-	<div class="row2" align="center">	
+	<div class="row2" align="center">
 		<div class="column" align="center">
 		  <a href="{% url 'login' %}"><img src="{% static 'images/eggs/mosaic.png' %}" alt="Log in" width="100%"><br>Log in</a>
 		</div>
 		<div class="column"align="center">
 		  <a href="{% url 'signup' %}"><img src="{% static 'images/eggs/canyon.png' %}" alt="Create Account" width="100%"><br>Create an Account</a>
-		</div> 
+		</div>
 	  </p>
 	</div>
 </div>

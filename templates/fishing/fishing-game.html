@@ -1,0 +1,197 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/fishing-pool.css' %}">
+{% endblock %}
+{% block content %}
+
+
+<h2>fishing game</h2>
+<p>Click in the pond to try catching a fish!</p>
+<p>fishes caught:</p>
+<p id="fishNum">No luck yet!</p>
+<div class= "pool" id = "pool">
+<div id = "animate-ripple"><img src="{% static 'images/games/ripple.png' %}"></div>
+</div>
+<div>
+<p id="help"></p>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<script>
+  //store fishes:
+
+  var hooked = true;
+  var canCast = true;
+  var newFish = true;
+  window.onbeforeunload = function() {
+    if (hooked) {
+      return "Wait! Be sure to save your catch first, or you might lose all your fishes!"
+    }
+  }
+  function unhook() {
+    hook=false;
+  }
+
+  var fishes = 0; //start with 0 fishes, unless they're stored, in which case:
+  if (sessionStorage.getItem("fishes")) { //if we had stored fishes
+    fishes = parseInt(sessionStorage.getItem("fishes")); //get fishes from last session
+  }
+  sessionStorage.setItem("fishes", fishes); //store the fish back
+
+  var canvas = document.getElementById('pool');
+
+  canvas.addEventListener("click", castOut, false)
+
+
+  function ripple(x, y, success) {
+    var elem = document.getElementById("animate-ripple")
+    locationy = y;
+    locationx = x;
+    var id = setInterval(frame, 70);
+    i = 0;
+    function frame() {
+      if (i < 10) {
+        n = .5; //this n controls how big the ripple is!
+        if (i % 2 == 0){
+          if (success) {
+            n = 2; //it's bigger when successful
+          }
+          size = i * n * 10;
+          radius = i * n * 5;
+          elem.style.width = size + "px";
+          elem.style.height = size + "px";
+          centery = locationy - radius;
+          centerx = locationx - radius;
+          elem.style.top = centery + 'px';
+          elem.style.left = centerx + "px";
+          elem.style.opacity = 1.0;
+        } else {
+        elem.style.opacity = 0.5;
+        }
+        i++;
+      }
+      else {
+        elem.style.opacity = 0.0;
+        canCast = true;
+        clearInterval(id);
+      }
+    }
+  }
+
+  function advice(attemptX, attemptY, fishX, fishY) {
+    var distX = attemptX - fishX; // if positive, attempt was too far to the right. If negative, it was too left
+    var distY = attemptY - fishY; // if positive, attempt was too far to the bottom. If negative, it was too high
+    if (distX < 0) {
+      var directionX = "right";
+    } else {
+      var directionX = "left";
+    }
+    if (distY < 0) {
+      var directionY = "lower";
+    } else {
+      var directionY = "higher";
+    }
+    var farDistance = 40;
+    var nearDistance = 20;
+    var inLine = 10;
+    var helpfulAdvice = "Try your luck."
+    if (Math.abs(distX) < nearDistance && Math.abs(distY) < nearDistance) {
+      helpfulAdvice = "very close! Keep trying!";
+    } else if (Math.abs(distX) < farDistance && Math.abs(distY) < farDistance) {
+      helpfulAdvice = "You are close! Keep trying!";
+    } else if (Math.abs(distX) >= nearDistance && Math.abs(distX) < farDistance && Math.abs(distY) < inLine) {
+      helpfulAdvice = "a little more to the " + directionX;
+    } else if (Math.abs(distX) >= farDistance && Math.abs(distY) < nearDistance) {
+      helpfulAdvice = "nothing here, try casting " + directionX;
+    } else if (Math.abs(distY) >= nearDistance && Math.abs(distY) < farDistance && Math.abs(distX) < inLine) {
+      helpfulAdvice = "a little " + directionY;
+    } else if (Math.abs(distY) >= farDistance && Math.abs(distX) < nearDistance) {
+      helpfulAdvice = "nothing here, try casting " + directionY;
+    } else {
+      helpfulAdvice = "try again!";
+    }
+    document.getElementById("help").innerHTML = helpfulAdvice;
+  }
+
+//function getPosition courtesy of kirupa.com's guide
+  function getPosition(el) { //on getting mouse click position
+    var xPos = 0;
+    var yPos = 0;
+
+    while (el) {
+      if (el == canvas) {
+        var xScrollPos = el.scrollLeft || document.documentElement.scrollLeft;
+        var yScrollPos = el.scrollTop || document.documentElement.scrollTop;
+
+        xPos += (el.offsetLeft - xScrollPos + el.clientLeft);
+        yPos += (el.offsetTop - yScrollPos + el.clientTop);
+      } else {
+        xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+        yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+      }
+      el = el.offsetParent;
+    }
+    return {
+      x: xPos,
+      y: yPos
+    };
+  }
+
+function fishPositions() {
+  if (newFish) {
+    fishX = Math.floor(Math.random() * 260);
+    fishY = Math.floor(Math.random() * 110);
+    if (fishX < 40) {
+      fishX += 40;
+    }
+    if (fishY < 40) {
+      fishY += 40;
+    }
+    fishNumLow = (fishX - 10) * (fishY - 10);
+    fishNumHigh = (fishX + 10) * (fishY + 10);
+    console.log(fishNumLow + "," + fishNumHigh);
+    return fishNumLow, fishNumHigh, fishX, fishY;
+  }
+}
+
+function castOut(e) {
+  fish = fishPositions();
+  newFish = false;
+  position = getPosition(canvas);
+  var elementX = position.x;
+  var elementY = position.y;
+  var clickX = e.clientX;
+  var clickY = e.clientY;
+  var success = false;
+  var clickFinalX = clickX - elementX; //get the click position relative to
+  var clickFinalY = clickY - elementY; //the element position
+  castPosition = clickFinalX * clickFinalY;
+  if (canCast) { //keeps you casting once at a time
+      canCast = false; //reset by ripple ending
+    if (castPosition > fishNumLow && castPosition < fishNumHigh) {
+      success = true;
+      newFish = true;
+      ripple(clickFinalX, clickFinalY, success);
+      document.getElementById("help").innerHTML = "You caught a fish!"
+      fishes += 1
+      document.getElementById("fishNum").innerHTML = fishes;
+      sessionStorage.setItem("fishes", fishes);
+    } else { //you didn't catch a fish
+      success = false;
+      ripple(clickFinalX, clickFinalY, success);
+      advice(clickFinalX, clickFinalY, fishX, fishY)
+      if (fishes == 0){
+        document.getElementById("fishNum").innerHTML = "no luck yet!";
+      }
+      else {
+        document.getElementById("fishNum").innerHTML = fishes;
+      }
+    }
+  }
+}
+
+</script>
+{% endblock %}

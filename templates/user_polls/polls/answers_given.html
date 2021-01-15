@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+{% for key, answer in qAndAs.items %}
+<p><h2> {{ key }}: </h2></p>
+{% for answerData in answer %} 
+	{{ answerData.answer }}</p>
+	{% endfor %}
+{% endfor %}
+</div>
+<hr />
+{% endblock content %}

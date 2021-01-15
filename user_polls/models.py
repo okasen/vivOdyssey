@@ -17,10 +17,8 @@ class Question(models.Model):
     text = models.CharField('short description of the question', max_length=280)
     
 class Answer(models.Model):
-    user = Player
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    user = models.ForeignKey(Player, on_delete=models.CASCADE,)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE,)
     answer = models.TextField('Give your input')
-    date_answered = datetime.now(tz)
-
-    exclude = ['user', 'date_answered']
+    date_answered = models.DateField()
     
