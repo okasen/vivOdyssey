@@ -25,6 +25,5 @@ urlpatterns = [
     path('lore/', include('lore.urls')),
     path('polls/', include('user_polls.urls')),
     path('games/', include('fishing.urls')),
-    path('pets/', include('petData.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 ]
