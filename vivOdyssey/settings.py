@@ -76,7 +76,6 @@ INSTALLED_APPS = [
     'accounts',
     'user_polls',
     'fishing',
-    'petData',
 ]
 
 MIDDLEWARE = [
@@ -181,3 +180,4 @@ DATABASES = {
         },
     },
 }
+
