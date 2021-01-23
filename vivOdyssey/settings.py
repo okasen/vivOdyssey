@@ -77,7 +77,6 @@ INSTALLED_APPS = [
     'user_polls',
     'fishing',
     'petData',
-    'rest_framework'
 ]
 
 MIDDLEWARE = [

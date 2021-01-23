@@ -1,0 +1,39 @@
+@font-face {
+  font-family: riffic;
+  src: url("../css/fonts/riffic-bold-webfont.b5e2383f52b8.woff");
+}
+
+@font-face {
+  font-family: calluna;
+  src: url("../css/fonts/callunasansregular.c95f311e5e9d.woff");
+}
+
+body {
+	background-color: #deF;
+	font-family: calluna;
+}
+
+h1 {
+	font-family: riffic;
+	font-size: 50px;
+	text-decoration: none;
+}
+
+h1 a, a:visited{
+	text-decoration: none;
+	color: #000;
+}
+
+h1 a:hover {
+	font-size: 52px;
+	color: #992277;
+	text-decoration: none;
+}
+
+
+.rect {
+	padding: 20px;
+	background-color:rgba(255,255,255,.5);
+	width: 40%;
+	text-align: Left;
+}
