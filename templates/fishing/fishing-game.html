@@ -12,7 +12,8 @@
 <p>fishes caught:</p>
 <p id="fishNum">No luck yet!</p>
 <div class= "pool" id = "pool">
-<div id = "animate-ripple"><img src="{% static 'images/games/ripple.png' %}"></div>
+<img src="{% static 'images/games/pondtp.png' %}">
+<div id = "animate-ripple"><img src="{% static 'images/games/bobbertp.png' %}"></div>
 </div>
 <div>
 <p id="help"></p>
@@ -28,7 +29,7 @@
   var newFish = true;
   window.onbeforeunload = function() {
     if (hooked) {
-      return "Wait! Be sure to save your catch first, or you might lose all your fishes!"
+      return "Wait! Be sure to save your catch first, or you might lose all of your fish!"
     }
   }
   function unhook() {
@@ -54,22 +55,19 @@
     i = 0;
     function frame() {
       if (i < 10) {
-        n = .5; //this n controls how big the ripple is!
-        if (i % 2 == 0){
+        n = 1; //this n controls how big the ripple is!
+        if (i % 3 == 0){
           if (success) {
-            n = 2; //it's bigger when successful
+            n = 4; //it's bigger when successful
           }
-          size = i * n * 10;
-          radius = i * n * 5;
-          elem.style.width = size + "px";
-          elem.style.height = size + "px";
-          centery = locationy - radius;
-          centerx = locationx - radius;
+          centery = locationy - 15;
+          centerx = locationx - 15;
           elem.style.top = centery + 'px';
           elem.style.left = centerx + "px";
-          elem.style.opacity = 1.0;
+          bobberOpacity = 1.00 / n;
+          elem.style.opacity = bobberOpacity;
         } else {
-        elem.style.opacity = 0.5;
+        elem.style.opacity = 1.0;
         }
         i++;
       }

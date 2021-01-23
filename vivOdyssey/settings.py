@@ -52,6 +52,16 @@ ALLOWED_HOSTS = [
      '127.0.0.1',
     ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+}
+
 
 # Application definition
 
@@ -66,6 +76,8 @@ INSTALLED_APPS = [
     'accounts',
     'user_polls',
     'fishing',
+    'petData',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -76,6 +88,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'vivOdyssey.urls'
@@ -148,6 +161,7 @@ STATICFILES_DIRS = [
     ]
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/' # new
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #email backend
 #EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
@@ -161,7 +175,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vivodyssey',
         'USER': 'okasen',
-        'PASSWORD': os.getenv('PG_PASS'),
+        'PASSWORD': 'Sp33dyC@',
+        #'PASSWORD': os.getenv('PG_PASS'),
         'OPTIONS': {
             'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
         },
