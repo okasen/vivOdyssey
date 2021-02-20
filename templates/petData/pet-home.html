@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <script type="text/javascript" src="(% static 'Angular/polyfill.js' %)"></script>
+  <link rel="stylesheet" href="{% static 'Angular/styles.css' %}">
+  <script type="text/javascript" src="{% static 'Angular/runtime.js' %}"></script>
+  <script type="text/javascript" src="{% static 'Angular/main.js' %}"></script>
+{% endblock %}
