@@ -50,17 +50,9 @@ ALLOWED_HOSTS = [
 
      '46.101.45.185',
      '127.0.0.1',
-    ]
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication'
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
-}
-
+	'www.vivodyssey.com',
+	'vivodyssey.com',
+]
 
 # Application definition
 
