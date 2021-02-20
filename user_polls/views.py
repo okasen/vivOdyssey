@@ -24,7 +24,7 @@ register = template.Library()
 def allQuestions(request):
     questions = Question.objects.all()
     return render(request, 'user_polls/polls/list.html', {"questions": questions})
- 
+
 def userResults(request, *args, **kwargs):
     answers = Answer.objects.all()
     questions = Question.objects.all()
@@ -35,7 +35,7 @@ def userResults(request, *args, **kwargs):
     for question in questions:
         if question.pk not in listOfQuestions:
             listOfQuestions.append(question.pk)
-        
+
     for qid in listOfQuestions:
         qidList = answers.filter(question = qid)
         qidQuestion = questions.get(pk = qid)
@@ -53,7 +53,7 @@ class AnswerView(View): #view for answering questions
         self.question_id = kwargs.get("question_id")
         question = get_object_or_404(Question, pk = self.question_id)
         return render(self.request, self.atemplate_name, {"form": form, "question": question})
-    
+
     def post(self, *args, **kwargs):
         logger.info('posting')
         if self.request.is_ajax and self.request.method == "POST":
@@ -84,10 +84,10 @@ def receiveQuestion(request):
     return JsonResponse({}, status = 400)
 
 class QAView(UserPassesTestMixin, View): #Question Add View
-    
+
     def test_func(self):
         return self.request.user.groups.filter(name = "moderators")
-    
+
     form_class = QuestionCreate
     model_class = Question
     qtemplate_name = 'user_polls/polls/moderation.html'
@@ -107,6 +107,7 @@ class QAView(UserPassesTestMixin, View): #Question Add View
                 # save the data and after fetch the object in instance
                 if form.is_valid():
                     instance = form.save()
+                    form.save()
                     ser_instance = serializers.serialize('json', [ instance, ])
                     return JsonResponse({"instance": ser_instance}, status=200)
                 else:
@@ -120,7 +121,3 @@ class QAView(UserPassesTestMixin, View): #Question Add View
                 return JsonResponse(deleted, status=200)
             else:
                 return JsonResponse({"error": "couldn't discern type"}, status=400)
-            
-            
-
-

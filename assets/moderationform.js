@@ -21,7 +21,7 @@ var thead, tr, td;
 {% for question in questions %}
 	tr = document.createElement("tr");
 	qTable.appendChild(tr);
-	tr.appendChild(td = document.createElement("td"));
+	tr.appendChild(td = document.createElement("td")); 
 	td.innerHTML = "{{question.title}}";
 	tr.appendChild(td = document.createElement("td"));
 	td.innerHTML = "{{question.text}}";
