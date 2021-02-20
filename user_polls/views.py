@@ -1,10 +1,10 @@
 from django import template
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.core import serializers
 from .forms import QuestionCreate, AnswerForm
 from .models import Question, Answer
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 import _datetime
@@ -68,7 +68,7 @@ class AnswerView(View): #view for answering questions
             if True:
                 logger.info('valid')
                 form.save()
-                return render(self.request, self.atemplate_name, {"form": form, "question": question}, content_type="text/html")
+                return HttpResponseRedirect(reverse("all"))
             else:
                 return JsonResponse({"error": "oh no, but we knew to post"}, status=400)
         else:
