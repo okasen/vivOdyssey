@@ -68,7 +68,7 @@ class AnswerView(View): #view for answering questions
             if True:
                 logger.info('valid')
                 form.save()
-                return render(self.request, self.atemplate_name, {"form": form, "question": question})
+                return render(self.request, self.atemplate_name, {"form": form, "question": question}, content_type="text/html")
             else:
                 return JsonResponse({"error": "oh no, but we knew to post"}, status=400)
         else:
