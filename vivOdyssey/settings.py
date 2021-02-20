@@ -174,8 +174,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vivodyssey',
         'USER': 'okasen',
-        'PASSWORD': 'Sp33dyC@',
-        #'PASSWORD': os.getenv('PG_PASS'),
+        'PASSWORD': os.getenv('PG_PASS'),
         'OPTIONS': {
             'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
         },
