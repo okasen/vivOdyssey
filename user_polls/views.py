@@ -43,7 +43,7 @@ def userResults(request, *args, **kwargs):
         qidQuestion = questions.get(pk = qid)
         context[qidQuestion.title] = qidList
 
-    return render(request, 'user_polls/polls/answers_given.html', {'qAndAs': context})
+    return render(request, 'user_polls/polls/answers_given.html', {'qAndAs': context}, content_type="text/html")
 
 class AnswerView(View): #view for answering questions
     atemplate_name = 'user_polls/polls/answer.html'
