@@ -75,7 +75,6 @@ INSTALLED_APPS = [
     'accounts',
     'user_polls',
     'fishing',
-    'rest_framework'
 ]
 
 MIDDLEWARE = [
