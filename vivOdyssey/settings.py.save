@@ -47,12 +47,10 @@ LOGGING = {
 }
 
 ALLOWED_HOSTS = [
+
      '46.101.45.185',
      '127.0.0.1',
-     'vivodyssey.com',
-     'www.vivodyssey.com',
     ]
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
@@ -77,6 +75,8 @@ INSTALLED_APPS = [
     'accounts',
     'user_polls',
     'fishing',
+    'petData',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -174,10 +174,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vivodyssey',
         'USER': 'okasen',
-        'PASSWORD': os.getenv('PG_PASS'),
+        'PASSWORD': 'Sp33dyC@',
+        #'PASSWORD': os.getenv('PG_PASS'),
         'OPTIONS': {
             'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
         },
     },
 }
-
