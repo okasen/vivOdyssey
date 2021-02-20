@@ -31,13 +31,15 @@ def userResults(request, *args, **kwargs):
     listOfQuestions = []
     listOfTitles = []
     context = dict()
+    current_user = request.user
+    currentUserId = current_user.id
 
     for question in questions:
         if question.pk not in listOfQuestions:
             listOfQuestions.append(question.pk)
 
     for qid in listOfQuestions:
-        qidList = answers.filter(question = qid)
+        qidList = answers.filter(question_id = qid, user_id = currentUserId)
         qidQuestion = questions.get(pk = qid)
         context[qidQuestion.title] = qidList
 
