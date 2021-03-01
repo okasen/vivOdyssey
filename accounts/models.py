@@ -9,7 +9,7 @@ import datetime
 class Player(AbstractUser):
     email = models.EmailField(('email address'), unique=True)
     username = models.CharField(max_length=200,unique=True)
-    date_of_birth = models.DateField(("Date"), default=datetime.date.today)
+    date_of_birth = models.DateField(("Date of birth (mm/dd/yyyy)"), default=datetime.date.today)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []

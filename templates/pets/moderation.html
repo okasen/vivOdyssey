@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/pets-moderation.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="rect">
+  <form id="pet-create-form">
+    <div class="row">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group col-4">
+        <label class="col-12">{{ field.label }}</label>
+        {{ field }}
+      </div>
+
+
+      {% endfor %}
+
+
+      <div class = "col text-center">
+        <input type="submit" class="btn btn-primary" value="Create Pet" />
+      </div>
+    </div>
+  </form>
+</div>
+
+<hr />
+
+<div class="rect">
+  <p><h2>Species and their valid variants:</h2></p>
+  {% for species, variants in speciesAndVariants.items%}
+  <p><h2> {{ species }}: </h2></p>
+  {% for variantData in variants %}
+  <p>{{ variantData }}</p>
+    {% endfor %}
+  {% endfor %}
+</div>
+
+<hr />
+
+<div class="rect">
+  <div class="table-container">
+  <table class="petList" id="all_pets">
+  </table>
+  </div>
+</div>
+
+<script>
+var petRows = document.querySelector(".petList");
+var petTable = document.getElementById("all_pets");
+var thead, tr, td;
+
+petTable.appendChild(thead = document.createElement("thead"));
+thead.appendChild(tr = document.createElement("tr"));
+tr.appendChild(td = document.createElement("td"));
+td.innerHTML = "Picture";
+td.appendChild(td = document.createElement("td"));
+td.innerHTML = "Name";
+td.appendChild(td = document.createElement("td"));
+td.innerHTML = "Owner";
+td.appendChild(td = document.createElement("td"));
+td.innerHTML = "Species";
+tr.appendChild(td = document.createElement("td"));
+td.innerHTML = "Variant";
+td.appendChild(td = document.createElement("td"));
+td.innerHTML = "Description";
+
+{% for pet in pets %}
+  tr = document.createElement("tr");
+  petTable.appendChild(tr);
+  tr.appendChild(td = document.createElement("td"));
+  td.innerHTML = "{{pet.name}}"; //todo make this a picture
+  tr.appendChild(td = document.createElement("td"));
+  td.innerHTML = "{{pet.owner.username}}";
+  tr.appendChild(td = document.createElement("td"));
+  td.innerHTML = "{{pet.species}}";
+  tr.appendChild(td = document.createElement("td"));
+  td.innerHTML = "{{pet.variant}}";
+  tr.appendChild(td = document.createElement("td"));
+  td.innerHTML = "{{pet.description}}";
+{% endfor %}
+
+function getCookie(name) {
+	var cookieValue = null;
+	if (document.cookie && document.cookie !== '') {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = jQuery.trim(cookies[i]);
+			// Does this cookie string begin with the name we want?
+			if (cookie.substring(0, name.length + 1) === (name + '=')) {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
+			}
+		}
+	}
+	return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
+$(document).ready(function (){
+
+		$("#pet-create-form").submit(function (e) {
+			e.preventDefault();
+			var serializedData = $(this).serialize();
+
+			$.ajax({
+				type: "POST",
+				url: "{% url 'moderate-pets' %}",
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        },
+        headers: {'X-CSRFToken': '{{ csrf_token }}'},
+				data: serializedData,
+				success: function (response){
+					$("#pet-create-form").trigger('reset');
+
+
+					// var instance = response;
+					// var field = instance[0]["fields"];
+					// tr = document.createElement("tr");
+					// petTable.appendChild(tr);
+					// var id = field["name"]||"";
+					// tr.appendChild(td = document.createElement("td"));
+					// td.innerHTML = id;
+					// tr.appendChild(td = document.createElement("td"));
+					// td.innerHTML = field["owner"]||"";
+          // tr.appendChild(td = document.createElement("td"));
+          // td.innerHTML = field["species"]||"";
+          // tr.appendChild(td = document.createElement("td"));
+          // td.innerHTML = field["variant"]||"";
+          // tr.appendChild(td = document.createElement("td"));
+          // td.innerHTML = field["description"]||"";
+				},
+					error: function (response) {
+						// alert the error if any error occured
+						alert("oops");
+          }
+  			})
+  		})
+    });
+
+
+  </script>
+  {% endblock content %}

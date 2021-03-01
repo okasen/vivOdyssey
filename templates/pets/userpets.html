@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user-pets.css' %}">
+
+<div class="rect">
+  {% for pet in pets %}
+  <div class="pet">
+  <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
+    <h3><p>{{ pet.name }}</p></h3>
+  <p>{{ pet.description }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

@@ -15,10 +15,9 @@ tz = pytz.timezone('UTC')
 class Question(models.Model):
     title = models.CharField(max_length=100)
     text = models.CharField('short description of the question', max_length=280)
-    
+
 class Answer(models.Model):
     user = models.ForeignKey(Player, on_delete=models.CASCADE,)
     question = models.ForeignKey(Question, on_delete=models.CASCADE,)
     answer = models.TextField('Give your input')
     date_answered = models.DateField()
-    
