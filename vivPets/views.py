@@ -70,8 +70,10 @@ class ModPetView(UserPassesTestMixin, View):
                 #TODO: make it so you can't make naughty pets with sweary names
                 #TODO: check that the species/variant combo is valid
                 instance = form.save()
+                context = dict()
+                context["response"] = instance
                 form.save()
-                return render(self.request, self.template_name, instance)
+                return render(self.request, self.template_name, context)
 
             else:
                 return JsonResponse({"error": "Oh no, something went wrong POSTing this pet"})
