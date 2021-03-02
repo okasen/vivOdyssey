@@ -15,4 +15,4 @@ class Player(AbstractUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return "{}".format(self.email)
+        return self.username
