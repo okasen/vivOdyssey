@@ -71,7 +71,8 @@ class ModPetView(UserPassesTestMixin, View):
                 #TODO: check that the species/variant combo is valid
                 instance = form.save()
                 form.save()
-                return HttpResponseRedirect(reverse("moderate-pets"))
+                return render(self.request, self.template_name, instance)
+
             else:
                 return JsonResponse({"error": "Oh no, something went wrong POSTing this pet"})
 
