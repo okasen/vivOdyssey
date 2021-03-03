@@ -7,10 +7,13 @@
 
 <div class="rect">
   {% for pet in pets %}
+
+
   <div class="pet">
-  <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
-    <h3><p>{{ pet.name }}</p></h3>
-  <p>{{ pet.description }}</p>
+    <div class="pet-border">
+      </div>
+    <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
+    <h3>{{ pet.name }}</h3>
   </div>
   {% endfor %}
 </div>
