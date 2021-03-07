@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="rect">
+  <h2>Viewing details for {{ pet.name }}</h2>
+  <div class="pet">
+    <div class="pet-border"></div>
+    <img class="pet-image" src="{% static 'images/pets' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
+  <p><i>{{ pet.description }}</i></p>
+  <p>Species: {{ pet.species.name }}</p>
+  <p>Variant: {{ pet.variant.name }}</p>
+  <p>Age: Since the dawn of time</p>
+  <p>Gender: {{ pet.gender }}</p>
+  <h2>Stats:</h2>
+  <p>Attack: {{ stats.attack }}</p>
+  <p>Defense: {{ stats.defense }}</p>
+  <p>Hitpoints: {{ stats.hitpoints }}</p>
+  <p>Energy: {{ stats.energy }}</p>
+  <h2>Skills:</h2>
+  <ul>
+  {% for skill in skills %}
+  <li>{{ skill.name }}</li>
+  {% endfor %}
+  </ul>
+
+  <a href="{% url 'user-pets' %}"><h2>View all pets</h2></a>
+</div>
+{% endblock content %}

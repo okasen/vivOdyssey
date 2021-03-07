@@ -85,4 +85,4 @@ class Pet(models.Model):
     defense_modifier = models.IntegerField(blank=True)
     hitpoints_modifier = models.IntegerField(blank=True)
     energy_modifier = models.IntegerField(blank=True)
-    extra_skills = models.ManyToManyField('Skill', db_column='extra_skills', symmetrical=False, blank=True)
+    extra_skills = models.ManyToManyField('Skill', db_column='extra_skills', symmetrical=False, blank=True, null=True)

@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import View
 from django.urls import reverse_lazy, reverse
 from .forms import PetCreate
-from .models import Pet, Species, Variant
+from .models import Pet, Species, Variant, Skill
 from accounts.models import Player
 
 # import the logging library
@@ -16,11 +16,27 @@ logger = logging.getLogger(__name__)
 #
 # Create your views here.
 #
-# TODO make a view to see all the pets you have
-#
-# TODO make a view for acquiring pets
-#
+
+#TODO: Make logic to calculate the attack/def/HP stats with species/variant/individual factored in
+#TODO ALSO: make a bit of logic to list skills of pets
+
 # view for moderators to add pets
+class ViewPet(View):
+    template_name = "pets/view.html"
+    def get(self, *args, **kwargs):
+        self.pet_id = kwargs.get("pet_id")
+        pet = get_object_or_404(Pet, pk = self.pet_id)
+        species_skills = [skill for skill in Skill.objects.all() if skill in pet.species.base_skills.all()]
+        variant_skills = [skill for skill in Skill.objects.all() if skill in pet.variant.extra_skills.all()]
+        individual_skills = [skill for skill in Skill.objects.all() if skill in pet.extra_skills.all()]
+        stats = dict()
+        stats["attack"] = pet.species.base_attack + pet.variant.attack_modifier + pet.attack_modifier
+        stats["defense"] = pet.species.base_defense + pet.variant.defense_modifier + pet.defense_modifier
+        stats["hitpoints"] = pet.species.base_hitpoints + pet.variant.hitpoints_modifier + pet.hitpoints_modifier
+        stats["energy"] = pet.species.base_energy + pet.variant.energy_modifier + pet.energy_modifier
+        skills = species_skills + variant_skills + individual_skills
+        return render(self.request, self.template_name, {"pet": pet, "skills": skills, "stats": stats})
+
 class UserPetsView(LoginRequiredMixin, View):
 
     def get(self, *args, **kwargs):

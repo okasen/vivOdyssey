@@ -6,14 +6,13 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/user-pets.css' %}">
 
 <div class="rect">
+  <h2>Your pets</h2>
   {% for pet in pets %}
-
-
   <div class="pet">
     <div class="pet-border">
       </div>
     <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
-    <h3>{{ pet.name }}</h3>
+    <a href="{% url 'view-pet' pet_id=pet.id %}"><h3>{{ pet.name }}</h3></a>
   </div>
   {% endfor %}
 </div>
