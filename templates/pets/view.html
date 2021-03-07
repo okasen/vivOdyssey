@@ -8,7 +8,7 @@
   <h2>Viewing details for {{ pet.name }}</h2>
   <div class="pet">
     <div class="pet-border"></div>
-    <img class="pet-image" src="{% static 'images/pets' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
+    <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
   <p><i>{{ pet.description }}</i></p>
   <p>Species: {{ pet.species.name }}</p>
   <p>Variant: {{ pet.variant.name }}</p>
