@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 LOGGING = {
     'version': 1,
@@ -164,8 +164,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vivodyssey',
-        'USER': 'postgres',#'okasen',
-        'PASSWORD': 'postgres',#os.getenv('PG_PASS'),
+        'USER': 'okasen',
+        'PASSWORD': os.getenv('PG_PASS'),
         'OPTIONS': {
             'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
         },
