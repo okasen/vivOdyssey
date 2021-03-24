@@ -3,17 +3,18 @@
 {% load static %}
 
 {% block content %}
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/pet-view.css' %}">
+<a href="{% url 'user-pets' %}">View all pets</a>
 <div class="rect">
-  <h2>Viewing details for {{ pet.name }}</h2>
+  <h2>About <i>{{ pet.name }},</i> the {{ pet.variant.name }} {{ pet.species.name }}</h2>
   <div class="pet">
-    <div class="pet-border"></div>
     <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
-  <p><i>{{ pet.description }}</i></p>
-  <p>Species: {{ pet.species.name }}</p>
-  <p>Variant: {{ pet.variant.name }}</p>
+        <div class="pet-border"><i>{{ pet.description }}</i></div>
+  <div class="info">
   <p>Age: Since the dawn of time</p>
   <p>Gender: {{ pet.gender }}</p>
+  </div>
+  <div class="stats">
   <h2>Stats:</h2>
   <p>Attack: {{ stats.attack }}</p>
   <p>Defense: {{ stats.defense }}</p>
@@ -25,7 +26,8 @@
   <li>{{ skill.name }}</li>
   {% endfor %}
   </ul>
-
-  <a href="{% url 'user-pets' %}"><h2>View all pets</h2></a>
+  </div>
+  </diV>
 </div>
+<div id="clear2"></div>
 {% endblock content %}

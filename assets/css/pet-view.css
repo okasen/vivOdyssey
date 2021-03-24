@@ -1,0 +1,66 @@
+.rect{
+  position: relative;
+  z-index: -1;
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.pet-image{
+  position: relative;
+  width: auto;
+  height: 20em;
+  z-index: 2;
+}
+
+.pet-border{
+  position: absolute;
+  top: -.1em;
+  left: -.1em;
+  width: 98%;
+  padding-top: 70%;
+  height: 0%;
+  border-style: solid;
+  border-width: .2em;
+  border-bottom-width: 1em;
+  border-image-source: linear-gradient(140deg, rgba(155, 125, 125, .5), #511, black);
+  border-image-slice: 1;
+  z-index: 0;
+  box-shadow: 5px 10px 2px rgba(011, 011, 011, .5);
+  background-color: rgba(255, 255, 255, .5);
+  color: white;
+  font-size: 2em;
+  bottom: 30px;
+}
+
+.info{
+  position: absolute;
+  width: 50%;
+  top: 25em;
+  left: 2em;
+  margin-right: 50%;
+}
+
+.stats{
+  position: absolute;
+  width: 40%;
+  top: 3em;
+  margin-left: 60%;
+  right: 0;
+}
+
+h2{
+  position: relative;
+  z-index: 1;
+}
+
+a{
+  position: relative;
+  padding: 10px;
+  margin: 10px;
+}
+
+#clear2{
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
