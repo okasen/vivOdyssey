@@ -26,5 +26,6 @@ urlpatterns = [
     path('polls/', include('user_polls.urls')),
     path('games/', include('fishing.urls')),
     path('pets/', include('vivPets.urls')),
+    path('users/', include('user_profiles.urls')),
     path('', include('homepage.urls')),
 ]

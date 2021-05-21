@@ -81,8 +81,11 @@ class Pet(models.Model):
     variant = models.ForeignKey(Variant, on_delete=models.PROTECT,)
     gender = models.IntegerField(choices = Gender.choices)
     hatched = models.BooleanField(default=True)
-    attack_modifier = models.IntegerField(blank=True)
-    defense_modifier = models.IntegerField(blank=True)
-    hitpoints_modifier = models.IntegerField(blank=True)
-    energy_modifier = models.IntegerField(blank=True)
+    attack_modifier = models.IntegerField(blank=True, null=True)
+    defense_modifier = models.IntegerField(blank=True, null=True)
+    hitpoints_modifier = models.IntegerField(blank=True, null=True)
+    energy_modifier = models.IntegerField(blank=True, null=True)
     extra_skills = models.ManyToManyField('Skill', db_column='extra_skills', symmetrical=False, blank=True, null=True)
+
+    def __str__(self):
+        return self.name

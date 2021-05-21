@@ -9,11 +9,13 @@ class CustomUserCreationForm(ModelForm):
     password1 = forms.CharField(label='password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='confirm Password', widget=forms.PasswordInput)
 
+    #TO DO: Ensure that users signing up are at least 13
+
     class Meta:
         model = player
         fields = ('email', 'username', 'date_of_birth')
 
-    
+
     def save(self, commit=True):
         player = super().save(commit=False)
         player.set_password(self.cleaned_data["password1"])

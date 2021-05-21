@@ -13,14 +13,22 @@ import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-#
-# Create your views here.
-#
 
-#TODO: Make logic to calculate the attack/def/HP stats with species/variant/individual factored in
-#TODO ALSO: make a bit of logic to list skills of pets
+class userPetsMaker(LoginRequiredMixin, View):
+    template_name = "pets/makepet.html"
+    def get(self, *args, **kwargs): #get all pet types available with one variant displayed
+        variants = Variant.objects.all()
+        listOfBaseVariants = [] #a list of one variant per species
+        listOfSpecies = []
+        for variant in variants:
+            if variant.species not in listOfSpecies:
+                listOfSpecies.append(variant.species)
+                listOfBaseVariants.append(variant) #only append a variant if the species hasn't had a variant added yet
+        return render(self.request, self.template_name, {"species": listOfBaseVariants})
+    def post(self, *args, **kwargs):
+        return #TODO
 
-# view for moderators to add pets
+
 class ViewPet(View):
     template_name = "pets/view.html"
     def get(self, *args, **kwargs):
@@ -30,15 +38,15 @@ class ViewPet(View):
         variant_skills = [skill for skill in Skill.objects.all() if skill in pet.variant.extra_skills.all()]
         individual_skills = [skill for skill in Skill.objects.all() if skill in pet.extra_skills.all()]
         stats = dict()
-        stats["attack"] = pet.species.base_attack + pet.variant.attack_modifier + pet.attack_modifier
-        stats["defense"] = pet.species.base_defense + pet.variant.defense_modifier + pet.defense_modifier
-        stats["hitpoints"] = pet.species.base_hitpoints + pet.variant.hitpoints_modifier + pet.hitpoints_modifier
-        stats["energy"] = pet.species.base_energy + pet.variant.energy_modifier + pet.energy_modifier
+        stats["attack"] = pet.species.base_attack + pet.variant.attack_modifier + (pet.attack_modifier or 0)
+        stats["defense"] = pet.species.base_defense + pet.variant.defense_modifier + (pet.defense_modifier or 0)
+        stats["hitpoints"] = pet.species.base_hitpoints + pet.variant.hitpoints_modifier + (pet.hitpoints_modifier or 0)
+        stats["energy"] = pet.species.base_energy + pet.variant.energy_modifier + (pet.energy_modifier or 0)
         skills = species_skills + variant_skills + individual_skills
-        return render(self.request, self.template_name, {"pet": pet, "skills": skills, "stats": stats})
+        gender = pet.get_gender_display()
+        return render(self.request, self.template_name, {"pet": pet, "skills": skills, "stats": stats, "gender": gender})
 
 class UserPetsView(LoginRequiredMixin, View):
-
     def get(self, *args, **kwargs):
         current_user = self.request.user
         currentUserId = current_user.id
@@ -47,6 +55,7 @@ class UserPetsView(LoginRequiredMixin, View):
         return render(self.request, template_name, {"user": current_user.username, "pets": pets})
 
 
+# view for moderators to add pets
 class ModPetView(UserPassesTestMixin, View):
 
     def test_func(self):
