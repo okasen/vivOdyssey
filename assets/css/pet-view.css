@@ -11,7 +11,7 @@
   height: 20em;
   z-index: 2;
 }
-
+/* 
 .pet-border{
   position: absolute;
   top: -.1em;
@@ -30,7 +30,7 @@
   color: white;
   font-size: 2em;
   bottom: 30px;
-}
+} */
 
 .info{
   position: absolute;
