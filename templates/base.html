@@ -12,17 +12,27 @@
   <title>{% block title %}Viv Odyssey{% endblock %}</title>
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 
-  <main>
-  <div align=center>
-  <h1><a href="{% url 'home' %}">Viv Odyssey</a></h1>
+  <section id="head">
+  <header><img class="header-decor" src="{% static 'images/eggs/canyon.png' %}"><h1><a href="{% url 'home' %}">Viv Odyssey</a></h1><img class="header-decor" src="{% static 'images/eggs/plain.png' %}">  </header>
+  <nav>
+    <a href="{% url 'own-profile' %}">profile</a>
+    <a href="{% url 'all' %}">social</a>
+    <a href="{% url 'playfishing' %}">game</a>
+    <a href="{% url 'about' %}">about</a>
+    <a href="/">help</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">log out</a>
+    {% else %}
+    <a href="{% url 'login' %}">log in</a>
+    {% endif %}
+  </nav>
+  </section>
     {% block content %}
     {% endblock %}
 	{% block javascript %}
 	{% endblock %}
-  </div>
-  </main>
 
 </body>
 </html>

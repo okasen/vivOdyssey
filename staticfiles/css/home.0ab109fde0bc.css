@@ -1,0 +1,68 @@
+body {
+	background-color: #deF;
+}
+
+
+
+/*mobile*/
+@media (min-width: 320px) and (max-width: 999px) {
+	.options a, a:visited{
+		font-family: riffic;
+		font-size: 15px;
+		color: #000;
+		text-decoration: none;
+	}
+
+	.options a:hover{
+		font-size: 17px;
+		color: #992277;
+	}
+
+
+	.column {
+		display: inline-block;
+		width: 40%
+	}
+
+	.row1 {
+		width: 75%
+	}
+
+	/* Clear floats after the columns */
+	.row2:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+/*desktop*/
+@media (min-width: 1000px) {
+	.options a, a:visited{
+		font-family: riffic;
+		font-size: 15px;
+		color: #000;
+		text-decoration: none;
+	}
+	
+	.options a:hover{
+		font-size: 17px;
+		color: #992277;
+	}
+
+	.column {
+		display: inline-block;
+		width: 15%
+	}
+
+	.row1 {
+		width: 30%;
+	}
+
+	/* Clear floats after the columns */
+	.row2:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+}

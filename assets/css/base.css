@@ -9,31 +9,72 @@
 }
 
 body {
-	background-color: #deF;
+	background: linear-gradient(180deg, #86CFA3 0%, rgba(255, 255, 255, 0) 100%), #B9E5D5;
+  background-attachment: fixed;
 	font-family: calluna;
+}
+
+#head{
+    background-color: #FCD1B5;
+}
+
+#head, nav, header, main{
+  width: min(100%, 1000px);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+header{
+  text-align: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+nav{
+  background-color: rgba(240, 241, 230, 0.5);
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+nav a{
+  font-family: riffic;
+  font-size: 2em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #C347D2;
+}
+
+.header-decor{
+  height: 4em;
+  width: 4em;
+}
+
+main{
+  background-color: rgba(240, 241, 230, 0.5);
+  place-content: center;
 }
 
 h1 {
 	font-family: riffic;
-	font-size: 50px;
+	font-size: min(9vw, 50px);
 	text-decoration: none;
 }
 
-h1 a, a:visited{
+header a, a:visited, nav a{
 	text-decoration: none;
 	color: #000;
 }
 
-h1 a:hover {
-	font-size: 52px;
-	color: #992277;
-	text-decoration: none;
-}
-
-
-.rect {
-	padding: 20px;
-	background-color:rgba(255,255,255,.5);
-	width: 40em;
-	text-align: Left;
+header a:hover, nav a:hover {
+  color: #C347D2;
 }

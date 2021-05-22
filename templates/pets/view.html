@@ -9,24 +9,25 @@
   <h2>About <i>{{ pet.name }},</i> the {{ pet.variant.name }} {{ pet.species.name }}</h2>
   <div class="pet">
     <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
-        <div class="pet-border"><i>{{ pet.description }}</i></div>
-  <div class="info">
-  <p>Age: Since the dawn of time</p>
-  <p>Gender: {{ gender }}</p>
-  </div>
-  <div class="stats">
-  <h2>Stats:</h2>
-  <p>Attack: {{ stats.attack }}</p>
-  <p>Defense: {{ stats.defense }}</p>
-  <p>Hitpoints: {{ stats.hitpoints }}</p>
-  <p>Energy: {{ stats.energy }}</p>
-  <h2>Skills:</h2>
-  <ul>
-  {% for skill in skills %}
-  <li>{{ skill.name }}</li>
-  {% endfor %}
-  </ul>
-  </div>
+    <div class="info">
+    <i>{{ pet.description }}</i>
+    <p>Age: Since the dawn of time</p>
+    <p>Gender: {{ gender }}</p>
+    </div>
+
+    <div class="stats">
+    <h2>Stats:</h2>
+    <p>Attack: {{ stats.attack }}</p>
+    <p>Defense: {{ stats.defense }}</p>
+    <p>Hitpoints: {{ stats.hitpoints }}</p>
+    <p>Energy: {{ stats.energy }}</p>
+    <h2>Skills:</h2>
+    <ul>
+    {% for skill in skills %}
+    <li>{{ skill.name }}</li>
+    {% endfor %}
+    </ul>
+    </div>
   </diV>
 </div>
 <div id="clear2"></div>

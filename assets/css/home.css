@@ -2,67 +2,31 @@ body {
 	background-color: #deF;
 }
 
-
-
-/*mobile*/
-@media (min-width: 320px) and (max-width: 999px) {
-	.options a, a:visited{
-		font-family: riffic;
-		font-size: 15px;
-		color: #000;
-		text-decoration: none;
-	}
-
-	.options a:hover{
-		font-size: 17px;
-		color: #992277;
-	}
-
-
-	.column {
-		display: inline-block;
-		width: 40%
-	}
-
-	.row1 {
-		width: 75%
-	}
-
-	/* Clear floats after the columns */
-	.row2:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
+.egg-button{
+	width: max(25%, 200px);
 }
 
-/*desktop*/
-@media (min-width: 1000px) {
-	.options a, a:visited{
-		font-family: riffic;
-		font-size: 15px;
-		color: #000;
-		text-decoration: none;
-	}
-	
-	.options a:hover{
-		font-size: 17px;
-		color: #992277;
-	}
+p{
+	padding-top: 16px;
+}
 
-	.column {
-		display: inline-block;
-		width: 15%
-	}
+.options{
+	display: flex;
+	width: 100%;
+	text-align: center;
+	flex-flow: column nowrap;
+	align-content: center;
+	justify-content: space-evenly;
+}
 
-	.row1 {
-		width: 30%;
-	}
+.options a, a:visited{
+	font-family: riffic;
+	font-size: 2rem;
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
 
-	/* Clear floats after the columns */
-	.row2:after {
-	  content: "";
-	  display: table;
-	  clear: both;
-	}
+.options a:hover{
+	color: #C347D2;
 }
