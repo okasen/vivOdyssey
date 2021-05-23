@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<main>
 	<form id="question-form">
 		<div class="row">
 			{% csrf_token %}
@@ -20,13 +20,11 @@
 			</div>
 		</div>
 	</form>
-</div>
 <hr />
 
-<div class="container-fluid">
 	<table class="questionTable" id="all_questions">
 	</table>
-</div>
+	</main>
 <script>
 function createDeleteButton(rowId) {
 	var deleteButton = document.createElement('button');

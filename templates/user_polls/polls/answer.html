@@ -3,8 +3,7 @@
 {% load static %}
 
 {% block content %}
-
-<div class="container-fluid">
+<main class="container-fluid">
 	<form method="post" id="answer-form">
 		<div class="row">
 			{% csrf_token %}
@@ -22,18 +21,15 @@
 				</p>
 				{% endfor %}
 			</div>
-			
+
 			<div class = "col text-center">
 			<input type="submit" class="btn" value="Answer Question" />
 		</div>
 	</form>
-</div>
 <hr />
 
-<div class="container-fluid">
 	<table class="questionTable" id="all_questions">
 	</table>
-</div>
+</main>
 <script type="text/javascript" src="{% static "answerform.js" %}">
 {% endblock content %}
-	

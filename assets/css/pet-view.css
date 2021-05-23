@@ -1,8 +1,7 @@
-.rect{
-  position: relative;
-  z-index: -1;
-  margin: 20px;
-  background-color: rgba(255, 255, 255, 0);
+main{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 .pet-image{
@@ -12,20 +11,8 @@
   z-index: 2;
 }
 
-.info{
-  position: absolute;
-  width: 50%;
-  top: 25em;
-  left: 2em;
-  margin-right: 50%;
-}
-
 .stats{
-  position: absolute;
-  width: 40%;
-  top: 3em;
-  margin-left: 60%;
-  right: 0;
+  padding:16px;
 }
 
 h2{
@@ -43,4 +30,9 @@ a{
   position: relative;
   height: 200px;
   width: 100%;
+}
+
+.description{
+  width: 80%;
+  padding: 16px;
 }

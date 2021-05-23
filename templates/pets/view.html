@@ -4,31 +4,33 @@
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/pet-view.css' %}">
-<a href="{% url 'user-pets' %}">View all pets</a>
-<div class="rect">
-  <h2>About <i>{{ pet.name }},</i> the {{ pet.variant.name }} {{ pet.species.name }}</h2>
-  <div class="pet">
-    <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
-    <div class="info">
-    <i>{{ pet.description }}</i>
-    <p>Age: Since the dawn of time</p>
-    <p>Gender: {{ gender }}</p>
-    </div>
+<main>
+  <a href="{% url 'user-pets' %}">View all pets</a>
+    <article class="pet">
+      <h2>About <i>{{ pet.name }},</i> the {{ pet.variant.name }} {{ pet.species.name }}</h2>
+      <img class="pet-image" src="{% static 'images/pets/' %}{{ pet.species.name }}/{{ pet.variant.name }}.png">
+    </article>
 
-    <div class="stats">
-    <h2>Stats:</h2>
-    <p>Attack: {{ stats.attack }}</p>
-    <p>Defense: {{ stats.defense }}</p>
-    <p>Hitpoints: {{ stats.hitpoints }}</p>
-    <p>Energy: {{ stats.energy }}</p>
-    <h2>Skills:</h2>
-    <ul>
-    {% for skill in skills %}
-    <li>{{ skill.name }}</li>
-    {% endfor %}
-    </ul>
-    </div>
-  </diV>
-</div>
-<div id="clear2"></div>
+    <section class="stats">
+      <article class="info">
+        <p>Age: Since the dawn of time</p>
+        <p>Gender: {{ gender }}</p>
+      </article>
+      <h2>Stats:</h2>
+      <p>Attack: {{ stats.attack }}</p>
+      <p>Defense: {{ stats.defense }}</p>
+      <p>Hitpoints: {{ stats.hitpoints }}</p>
+      <p>Energy: {{ stats.energy }}</p>
+      <h2>Skills:</h2>
+      <ul>
+      {% for skill in skills %}
+      <li>{{ skill.name }}</li>
+      {% endfor %}
+      </ul>
+    </section>
+    <article class="description">
+        <i>{{ pet.description }}</i>
+    </article>
+</main>
+
 {% endblock content %}

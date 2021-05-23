@@ -5,7 +5,7 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/user-pets.css' %}">
 
-<div class="rect rect-pet">
+<main class="rect-pet">
   <h2>Your pets</h2>
   {% for pet in pets %}
   <div class="pet">
@@ -15,5 +15,5 @@
     <a href="{% url 'view-pet' pet_id=pet.id %}"><h3 class="pet-name">{{ pet.name }}</h3></a>
   </div>
   {% endfor %}
-</div>
+</main>
 {% endblock content %}

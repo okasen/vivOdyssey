@@ -6,17 +6,21 @@
 {% endblock %}
 {% block content %}
 
-
+<section class="info">
 <h2>fishing game</h2>
 <p>Click in the pond to try catching a fish!</p>
 <p>fish caught:</p>
 <p id="fishNum">No luck yet!</p>
-<div class= "pool" id = "pool">
-<img src="{% static 'images/games/pondtp.png' %}">
+</section>
+
+<div class="pool" id="pool">
+<img class="pool" src="{% static 'images/games/pondtp.png' %}">
 <span id = "animate-ripple"><img src="{% static 'images/games/bobbertp.png' %}"></span>
 </div>
-<p id="help"></p>
 
+<section class="info">
+<p id="help"></p>
+</section>
 {% endblock %}
 {% block javascript %}
 <script>
@@ -59,7 +63,7 @@
             n = 4; //it's bigger when successful
           }
           centery = locationy - 15;
-          centerx = locationx - 15;
+          centerx = locationx + 240;
           elem.style.top = centery + 'px';
           elem.style.left = centerx + "px";
           bobberOpacity = 1.00 / n;

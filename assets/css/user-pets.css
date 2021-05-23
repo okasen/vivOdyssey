@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: 22% 22% 22% 22%;
   grid-gap: 4%;
+  padding-top: 32px;
 }
 
 .pet{

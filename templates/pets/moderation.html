@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<div class="rect">
+<main>
   <form id="pet-create-form">
     <div class="row">
       {% csrf_token %}
@@ -28,11 +28,10 @@
       </div>
     </div>
   </form>
-</div>
 
 <hr />
 
-<div class="rect">
+<section>
   <p><h2>Species and their valid variants:</h2></p>
   {% for species, variants in speciesAndVariants.items%}
   <p><h2> {{ species }}: </h2></p>
@@ -40,17 +39,17 @@
   <p>{{ variantData }}</p>
     {% endfor %}
   {% endfor %}
-</div>
+</section>
 
 <hr />
 
-<div class="rect">
+<section>
   <div class="table-container">
   <table class="petList" id="all_pets">
   </table>
   </div>
-</div>
-
+</section>
+</main>
 <script>
 var petRows = document.querySelector(".petList");
 var petTable = document.getElementById("all_pets");

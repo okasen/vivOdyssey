@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<main>
 {% for key, answer in qAndAs.items %}
 <p><h2> {{ key }}: </h2></p>
-{% for answerData in answer %} 
+{% for answerData in answer %}
 	{{ answerData.answer }}</p>
 	{% endfor %}
 {% endfor %}
-</div>
+</main>
 <hr />
 {% endblock content %}

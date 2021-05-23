@@ -14,11 +14,3 @@ class User_Profile(models.Model):
     friendlyName = models.CharField(max_length=30)
     bio = models.CharField(max_length=500, default="Nothing to see here!", blank=True)
     starredPet = models.ForeignKey(Pet, on_delete=models.PROTECT, blank=True, null=True)
-
-
-@receiver(post_save, sender=Player)
-def create_profile_with_user(sender, **kwargs):
-    player = kwargs.get('instance')
-    if User_Profile.objects.filter(player = player) == 0:
-        newProfile = User_Profile(player = player, friendlyName = player.username)
-        newProfile.save()
