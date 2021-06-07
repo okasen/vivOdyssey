@@ -69,8 +69,7 @@ INSTALLED_APPS = [
     'user_profiles',
     'fishing',
     'vivPets',
-    'profanity',
-    'inflection',
+    'profanity'
 ]
 
 MIDDLEWARE = [
