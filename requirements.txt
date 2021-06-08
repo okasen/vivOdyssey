@@ -1,4 +1,4 @@
-asgiref==3.3.1
+asgiref==3.3.4
 beautifulsoup4==4.9.3
 blis==0.7.4
 cached-property==1.5.2
@@ -6,7 +6,7 @@ catalogue==1.0.0
 certifi==2020.12.5
 chardet==4.0.0
 cymem==2.0.5
-Django==3.1.7
+Django==3.2.4
 django-bootstrap4==2.3.1
 django-jquery==3.1.0
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz
