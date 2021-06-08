@@ -1,10 +1,6 @@
 import re
 import os
 
-import inflect
-
-p = inflect.engine()
-
 
 class ProfanityFilter:
     def __init__(self, **kwargs):
