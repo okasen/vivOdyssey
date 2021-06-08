@@ -71,7 +71,6 @@ class ProfanityFilter:
             profane_words = [w for w in self._censor_list]
 
         profane_words.extend(self._extra_censor_list)
-        profane_words.extend([p.plural(word) for word in profane_words])
         profane_words = list(set(profane_words))
 
         return profane_words
