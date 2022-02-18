@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('vivPets', '0005_auto_20210512_0934'),
+        ('viv_pets', '0005_auto_20210512_0934'),
     ]
 
     operations = [
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('friendlyName', models.CharField(max_length=30)),
                 ('bio', models.CharField(max_length=500)),
                 ('player', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('starredPet', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='vivPets.pet')),
+                ('starredPet', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='viv_pets.pet')),
             ],
         ),
     ]

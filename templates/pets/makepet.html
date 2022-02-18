@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/pets-moderation.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<main>
+  <p>Create your pet!</p>
+  <p><b>You must allocate exactly TWO points between all of the stats. For example, 1 point to hitpoints AND 1 point to defense, OR 2 points to energy, etc.</b></p>
+  {% for error in pet_errors %}
+  <p>error</p>
+  {% endfor %}
+  <form id="pet-create-form">
+    <div class="row">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group col-4">
+        <label class="col-12">{{ field.label }}</label>
+        {{ field }}
+      </div>
+
+      {% endfor %}
+
+      <div class = "col text-center">
+        <input type="submit" class="btn btn-primary" value="Create Pet" />
+      </div>
+    </div>
+  </form>
+
+<hr />
+
+<section>
+  <p><h2>Available Species:</h2></p>
+  {% for individual in species %}
+  <p><h2> {{ individual }}: </h2></p>
+  {% endfor %}
+</section>
+</main>
+
+<script>
+
+  $(document).ready(function (){
+
+  		$("#pet-create-form").submit(function (e) {
+  			e.preventDefault();
+  			var serializedData = $(this).serialize();
+
+  			$.ajax({
+  				type: "POST",
+  				url: "{% url 'create-pets' %}",
+          headers: {'X-CSRFToken': '{{ csrf_token }}'},
+  				data: serializedData,
+  				success: function (response){
+  					$("#pet-create-form").trigger('reset');
+  				},
+  					error: function (response) {
+  						// alert the error if any error occured
+  						alert("oops");
+            }
+    			})
+    		})
+      });
+
+</script>
+
+{% endblock %}

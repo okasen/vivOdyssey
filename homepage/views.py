@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
-from vivPets.models import Pet, Species, Variant, Skill
+from viv_pets.models import Pet, Species, Variant, Skill
 from accounts.models import Player
 from user_profiles.models import User_Profile
 from django.db.models.aggregates import Count

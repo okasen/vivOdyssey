@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import View
 from django.urls import reverse_lazy, reverse
-from .forms import PetCreate
+from .forms import PetCreate, UserPetCreate
 from .models import Pet, Species, Variant, Skill
 from accounts.models import Player
 
@@ -14,19 +14,38 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-class userPetsMaker(LoginRequiredMixin, View):
+class UserPetsMaker(LoginRequiredMixin, View):
+    form_class = UserPetCreate
     template_name = "pets/makepet.html"
     def get(self, *args, **kwargs): #get all pet types available with one variant displayed
+        form = self.form_class()
         variants = Variant.objects.all()
         listOfBaseVariants = [] #a list of one variant per species
         listOfSpecies = []
         for variant in variants:
             if variant.species not in listOfSpecies:
                 listOfSpecies.append(variant.species)
-                listOfBaseVariants.append(variant) #only append a variant if the species hasn't had a variant added yet
-        return render(self.request, self.template_name, {"species": listOfBaseVariants})
+                listOfBaseVariants.append([variant, variant.species]) #only append a variant if the species hasn't had a variant added yet
+        return render(self.request, self.template_name, {"form": form, "species": listOfBaseVariants})
     def post(self, *args, **kwargs):
-        return #TODO
+        if self.request.is_ajax and self.request.method == "POST":
+            form = self.form_class(self.request.POST)
+            if form.is_valid():
+                logger.debug('pet POST form is valid, checking for stat validity')
+                new_pet = form.save(commit=False)
+                new_pet.owner = self.request.user
+                pet_modifiers_total = new_pet.attack_modifier + new_pet.defense_modifier + new_pet.hitpoints_modifier + new_pet.energy_modifier
+                modifier_goal = 2
+                if pet_modifiers_total == modifier_goal:
+                    context = dict()
+                    context["response"] = new_pet
+                    new_pet.save()
+                    return render(self.request, self.template_name, context)
+                else:
+                    return JsonResponse({"error": "Your pet must have exactly two modifier points distributed across its stats"})
+
+            else:
+                return JsonResponse({"error": "Oh no, something went wrong POSTing this pet"})
 
 
 class ViewPet(View):
@@ -70,7 +89,7 @@ class ModPetView(UserPassesTestMixin, View):
     template_name = "pets/moderation.html"
 
     def get(self, *args, **kwargs):
-        logger.debug("getting")
+        logger.debug("getting list of species")
         form = self.form_class()
         listOfSpecies = []
         listOfVariants = []
@@ -87,7 +106,7 @@ class ModPetView(UserPassesTestMixin, View):
         return render(self.request, self.template_name, {"form": form, "pets": self.pets, 'speciesAndVariants': self.context}, content_type="text/html")
 
     def post(self, *args, **kwargs):
-        logger.debug('inside post')
+        logger.debug('trying to post a pet')
         if self.request.is_ajax and self.request.method == "POST":
             form = self.form_class(self.request.POST)
             if form.is_valid():

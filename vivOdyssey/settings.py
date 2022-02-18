@@ -68,8 +68,8 @@ INSTALLED_APPS = [
     'user_polls',
     'user_profiles',
     'fishing',
-    'vivPets',
-    'profanity'
+    'viv_pets',
+    'profanity',
 ]
 
 MIDDLEWARE = [
@@ -160,13 +160,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #EMAIL_FILE_PATH = str(BASE_DIR.joinpath('send_emails'))
 
 #dates
-DATE_INPUT_FORMATS = ['%m/%d/%Y']
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'vivodyssey',
-        'USER': 'okasen',
+        'USER': os.getenv('PG_USER'),
         'PASSWORD': os.getenv('PG_PASS'),
         'OPTIONS': {
             'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,

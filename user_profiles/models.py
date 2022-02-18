@@ -5,7 +5,7 @@ from django.forms.widgets import DateInput
 import datetime
 
 from accounts.models import Player
-from vivPets.models import Pet
+from viv_pets.models import Pet
 # Create your models here.
 
 class User_Profile(models.Model):

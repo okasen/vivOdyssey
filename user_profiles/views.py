@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import User_Profile
-from vivPets.models import Pet
+from viv_pets.models import Pet
 from accounts.models import Player
 
 # Create your views here.

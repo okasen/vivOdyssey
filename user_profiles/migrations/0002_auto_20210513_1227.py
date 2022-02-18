@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vivPets', '0008_auto_20210513_1227'),
+        ('viv_pets', '0008_auto_20210513_1227'),
         ('user_profiles', '0001_initial'),
     ]
 
@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user_profile',
             name='starredPet',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='vivPets.pet'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='viv_pets.pet'),
         ),
     ]

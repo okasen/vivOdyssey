@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.contrib.postgres.fields import ArrayField
 from datetime import datetime
 import pytz
+from profanity.validators import validate_is_profane_nospace
+
 
 # Create your models here.
 
@@ -75,8 +77,8 @@ class Pet(models.Model):
         MALE = 2;
     owner = models.ForeignKey(Player, on_delete=models.CASCADE)
     date_created = models.DateField(default=timezone.now())
-    name = models.CharField(max_length=15)
-    description = models.CharField(max_length=500, blank=True)
+    name = models.CharField(max_length=15, validators=[validate_is_profane_nospace])
+    description = models.CharField(max_length=500, blank=True, validators=[validate_is_profane_nospace])
     species = models.ForeignKey(Species, on_delete=models.PROTECT,)
     variant = models.ForeignKey(Variant, on_delete=models.PROTECT,)
     gender = models.IntegerField(choices = Gender.choices)

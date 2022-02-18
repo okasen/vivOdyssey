@@ -19,9 +19,7 @@
         {{ field }}
       </div>
 
-
       {% endfor %}
-
 
       <div class = "col text-center">
         <input type="submit" class="btn btn-primary" value="Create Pet" />
@@ -85,24 +83,6 @@ td.innerHTML = "Description";
   td.innerHTML = "{{pet.description}}";
 {% endfor %}
 
-// function getCookie(name) {
-// 	var cookieValue = null;
-// 	if (document.cookie && document.cookie !== '') {
-// 		var cookies = document.cookie.split(';');
-// 		for (var i = 0; i < cookies.length; i++) {
-// 			var cookie = jQuery.trim(cookies[i]);
-// 			// Does this cookie string begin with the name we want?
-// 			if (cookie.substring(0, name.length + 1) === (name + '=')) {
-// 				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-// 				break;
-// 			}
-// 		}
-// 	}
-// 	return cookieValue;
-// }
-//
-// var csrftoken = getCookie('csrftoken');
-
 $(document).ready(function (){
 
 		$("#pet-create-form").submit(function (e) {
@@ -116,23 +96,6 @@ $(document).ready(function (){
 				data: serializedData,
 				success: function (response){
 					$("#pet-create-form").trigger('reset');
-
-
-					// var instance = response;
-					// var field = instance[0]["fields"];
-					// tr = document.createElement("tr");
-					// petTable.appendChild(tr);
-					// var id = field["name"]||"";
-					// tr.appendChild(td = document.createElement("td"));
-					// td.innerHTML = id;
-					// tr.appendChild(td = document.createElement("td"));
-					// td.innerHTML = field["owner"]||"";
-          // tr.appendChild(td = document.createElement("td"));
-          // td.innerHTML = field["species"]||"";
-          // tr.appendChild(td = document.createElement("td"));
-          // td.innerHTML = field["variant"]||"";
-          // tr.appendChild(td = document.createElement("td"));
-          // td.innerHTML = field["description"]||"";
 				},
 					error: function (response) {
 						// alert the error if any error occured

@@ -25,7 +25,7 @@ urlpatterns = [
     path('lore/', include('lore.urls')),
     path('polls/', include('user_polls.urls')),
     path('games/', include('fishing.urls')),
-    path('pets/', include('vivPets.urls')),
+    path('pets/', include('viv_pets.urls')),
     path('users/', include('user_profiles.urls')),
     path('', include('homepage.urls')),
 ]
